@@ -7,6 +7,7 @@ let package = Package(
     ],
     dependencies: [
         .Package(url: "https://github.com/PureSwift/BluetoothLinux", majorVersion: 2),
-        .Package(url: "https://github.com/IBM-Swift/BlueSignals", majorVersion: 0)
+        .Package(url: "https://github.com/IBM-Swift/BlueSignals", majorVersion: 0),
+        .Package(url: "https://github.com/IBM-Swift/BlueSocket.git", majorVersion: 0)
     ]
 )
