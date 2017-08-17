@@ -15,6 +15,7 @@ import CoreBluetooth
 class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
     
     let TAG = "BLEHandler"
+    let BLE_DEVICE_FILTER: String = "pib"
     let broadcasterDbAt1m: Double = -59.0
     let numRSSIValuesToAverage: Int = 10
 
@@ -24,6 +25,7 @@ class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
     var delegate : BLEHandlerDelegate!
     
     var foundDevices : [UUID : FixedQueue]!
+    
 
     
     
@@ -45,7 +47,7 @@ class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
 
             centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])
             
-            //centralManager.scanForPeripherals(withServices: nil, options: nil)
+            
         } else {
             centralManager.stopScan()
         }
@@ -63,11 +65,13 @@ class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
         let localName : String? = advertisementData[CBAdvertisementDataLocalNameKey] as? String
         
         
-        if(localName != nil){
-            
+        if(localName != nil && localName!.hasPrefix(BLE_DEVICE_FILTER)){
+        
+  
             let peripheralUUID: UUID = peripheral.identifier
             
             if foundDevices[peripheralUUID] == nil {
+                print("New device found")
                 foundDevices[peripheralUUID] = FixedQueue(maxSize: numRSSIValuesToAverage)
             }
             

@@ -15,6 +15,7 @@
 		53ED45091F3EF7BE00E21249 /* BLEHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED45081F3EF7BE00E21249 /* BLEHandler.swift */; };
 		53ED450B1F3EF8A600E21249 /* BLEHandlerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED450A1F3EF8A600E21249 /* BLEHandlerDelegate.swift */; };
 		53ED450D1F3F4A5300E21249 /* FixedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED450C1F3F4A5300E21249 /* FixedQueue.swift */; };
+		75C65C0A1AEC6FBDCCD19610 /* Pods_BLE_Locator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFFF53E47F9F0BC76827946 /* Pods_BLE_Locator.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,9 @@
 		53ED45081F3EF7BE00E21249 /* BLEHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEHandler.swift; sourceTree = "<group>"; };
 		53ED450A1F3EF8A600E21249 /* BLEHandlerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEHandlerDelegate.swift; sourceTree = "<group>"; };
 		53ED450C1F3F4A5300E21249 /* FixedQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixedQueue.swift; sourceTree = "<group>"; };
+		712AEB74BB927628DFCBCBED /* Pods-BLE Locator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE Locator.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLE Locator/Pods-BLE Locator.release.xcconfig"; sourceTree = "<group>"; };
+		BEFFF53E47F9F0BC76827946 /* Pods_BLE_Locator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLE_Locator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8817A80F240DAE4F88359F5 /* Pods-BLE Locator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE Locator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLE Locator/Pods-BLE Locator.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75C65C0A1AEC6FBDCCD19610 /* Pods_BLE_Locator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +51,8 @@
 			children = (
 				53ED44F51F3EEFF800E21249 /* BLE Locator */,
 				53ED44F41F3EEFF800E21249 /* Products */,
+				568270D7ED183AC2ACEA6407 /* Pods */,
+				B60038DA18B0199D204D7AD6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +80,23 @@
 			path = "BLE Locator";
 			sourceTree = "<group>";
 		};
+		568270D7ED183AC2ACEA6407 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F8817A80F240DAE4F88359F5 /* Pods-BLE Locator.debug.xcconfig */,
+				712AEB74BB927628DFCBCBED /* Pods-BLE Locator.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B60038DA18B0199D204D7AD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BEFFF53E47F9F0BC76827946 /* Pods_BLE_Locator.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -80,9 +104,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53ED45051F3EEFF800E21249 /* Build configuration list for PBXNativeTarget "BLE Locator" */;
 			buildPhases = (
+				EF9B7E1A70D0B70BB32B2CAB /* [CP] Check Pods Manifest.lock */,
 				53ED44EF1F3EEFF800E21249 /* Sources */,
 				53ED44F01F3EEFF800E21249 /* Frameworks */,
 				53ED44F11F3EEFF800E21249 /* Resources */,
+				C288826250CE2D176448B5D2 /* [CP] Embed Pods Frameworks */,
+				8D5E48E3E515CE1DF54B12B5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -140,6 +167,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8D5E48E3E515CE1DF54B12B5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BLE Locator/Pods-BLE Locator-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C288826250CE2D176448B5D2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BLE Locator/Pods-BLE Locator-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BlueSocket/Socket.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Socket.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BLE Locator/Pods-BLE Locator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF9B7E1A70D0B70BB32B2CAB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BLE Locator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		53ED44EF1F3EEFF800E21249 /* Sources */ = {
@@ -271,6 +352,7 @@
 		};
 		53ED45061F3EEFF800E21249 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8817A80F240DAE4F88359F5 /* Pods-BLE Locator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4CRDGAEC4G;
@@ -284,6 +366,7 @@
 		};
 		53ED45071F3EEFF800E21249 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 712AEB74BB927628DFCBCBED /* Pods-BLE Locator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4CRDGAEC4G;

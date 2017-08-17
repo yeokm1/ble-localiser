@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BLE Locator/ViewController.swift"
+            timestampString = "524677228.65929"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "sendPacket(ipAddress:distance:maxDistance:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BLE_Locator.ViewController.sendPacket (ipAddress : Swift.String, distance : Swift.Double, maxDistance : Swift.Double) -&gt; ()"
+                  moduleName = "BLE Locator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yeokm1/Dropbox/git-projects/ble-localiser/BLE%20Locator/BLE%20Locator/ViewController.swift"
+                  timestampString = "524673632.55933"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "484">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BLE_Locator.ViewController.sendPacket (ipAddress : Swift.String, distance : Swift.Double, maxDistance : Swift.Double) -&gt; ()"
+                  moduleName = "BLE Locator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yeokm1/Dropbox/git-projects/ble-localiser/BLE%20Locator/BLE%20Locator/ViewController.swift"
+                  timestampString = "524673632.562013"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "872">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BLE Locator/ViewController.swift"
+            timestampString = "524677228.65929"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "sendPacket(ipAddress:distance:maxDistance:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
