@@ -30,18 +30,29 @@ Signals.trap(signal: .int) { signal in
 }
 
 @discardableResult
-func run(_ cmd: String) -> String? {
-    let pipe = Pipe()
-    let process = Process()
-    process.launchPath = "/bin/sh"
-    process.arguments = ["-c", cmd]
-    process.standardOutput = pipe
-    let fileHandle = pipe.fileHandleForReading
-    process.launch()
-    let output = String(data: fileHandle.readDataToEndOfFile(), encoding: .utf8)
-		let trimmed = output?.trimmingCharacters(in: .whitespacesAndNewlines)
-		return trimmed
-}
+func run(_ cmd: String) -> String{
+		 var outstr = ""
+		 let task = Task()
+		 task.launchPath = "/bin/sh"
+		 task.arguments = ["-c", cmd]
+
+		 let pipe = Pipe()
+		 task.standardOutput = pipe
+		 task.launch()
+
+		 let data = pipe.fileHandleForReading.readDataToEndOfFile()
+		 if let output = String(data: data, encoding: String.Encoding.utf8) {
+				 print(output)
+				 outstr = output as String
+		 }
+
+		 task.waitUntilExit()
+		 let status = task.terminationStatus
+
+		 print(status)
+
+		 return outstr
+ }
 
 if let valueRead = ProcessInfo.processInfo.environment["PIB-COLOUR"] {
     colour = valueRead
