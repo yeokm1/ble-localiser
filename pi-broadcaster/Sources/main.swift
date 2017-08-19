@@ -12,7 +12,6 @@ let iBeaconUUID = Foundation.UUID(rawValue: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E
 var adapter: Adapter?
 var listenSocket: Socket?
 
-var colour: String
 let portNumber: Int = 55555
 
 func cleanupBeforeExit(){
@@ -42,25 +41,15 @@ func run(_ cmd: String) -> String{
 
 		 let data = pipe.fileHandleForReading.readDataToEndOfFile()
 		 if let output = String(data: data, encoding: String.Encoding.utf8) {
-				 print(output)
 				 outstr = output as String
 		 }
 
 		 task.waitUntilExit()
-		 let status = task.terminationStatus
+		//  let status = task.terminationStatus
+		//  print(status)
 
-		 print(status)
-
-		 return outstr
+		 return outstr.trimmingCharacters(in: .whitespacesAndNewlines)
  }
-
-if let valueRead = ProcessInfo.processInfo.environment["PIB-COLOUR"] {
-    colour = valueRead
-		print("Provided colour code is \(colour)")
-} else {
-		print("Colour code not provided in PIB-COLOUR environment variable")
-		exit(1)
-}
 
 print("Adjusting device name...")
 
@@ -71,7 +60,21 @@ run("hciconfig hci0 down")
 run("hciconfig hci0 up")
 
 //TODO: Don't force unwrap ipAddr
-let localName = "pib-" + colour + "-" + ipAddr!
+print("IP address is " + ipAddr!)
+
+let addressComponents: [String] = ipAddr!.components(separatedBy: ".")
+let lastOctet: String = addressComponents[addressComponents.count - 1]
+
+
+let hcitoolDevOutput: String? = run("hcitool dev")
+
+let macAddrComponents: [String] = hcitoolDevOutput!.components(separatedBy: ":")
+let maclastOctet: String = macAddrComponents[macAddrComponents.count - 1]
+
+
+let localName = "pib-" + maclastOctet + "-" + lastOctet
+
+
 print("Local name: " + localName)
 
 run("hciconfig hci0 name " + localName)
@@ -79,7 +82,6 @@ run("hciconfig hci0 name " + localName)
 //Reset again to let the new device name take effec
 run("hciconfig hci0 down")
 run("hciconfig hci0 up")
-
 
 do {
     adapter = try Adapter()

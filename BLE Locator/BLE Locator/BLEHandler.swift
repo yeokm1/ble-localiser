@@ -61,8 +61,7 @@ class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
         
         //Step 2 : Received advertisement packet
         
-       
-        let localName : String? = advertisementData[CBAdvertisementDataLocalNameKey] as? String
+        let localName: String? = advertisementData[CBAdvertisementDataLocalNameKey] as? String
         
         
         if(localName != nil && localName!.hasPrefix(BLE_DEVICE_FILTER)){

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		534B50201F47E5FA00666ACD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 534B501F1F47E5FA00666ACD /* Default-568h@2x.png */; };
 		53ED44F71F3EEFF800E21249 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED44F61F3EEFF800E21249 /* AppDelegate.swift */; };
 		53ED44F91F3EEFF800E21249 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED44F81F3EEFF800E21249 /* ViewController.swift */; };
 		53ED44FC1F3EEFF800E21249 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53ED44FA1F3EEFF800E21249 /* Main.storyboard */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		534B501F1F47E5FA00666ACD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		534B50211F47E6E100666ACD /* BLE Locator-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BLE Locator-Bridging-Header.h"; path = "BLE Locator/BLE Locator-Bridging-Header.h"; sourceTree = "<group>"; };
 		53ED44F31F3EEFF800E21249 /* BLE Locator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BLE Locator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53ED44F61F3EEFF800E21249 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53ED44F81F3EEFF800E21249 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +52,8 @@
 		53ED44EA1F3EEFF800E21249 = {
 			isa = PBXGroup;
 			children = (
+				534B50211F47E6E100666ACD /* BLE Locator-Bridging-Header.h */,
+				534B501F1F47E5FA00666ACD /* Default-568h@2x.png */,
 				53ED44F51F3EEFF800E21249 /* BLE Locator */,
 				53ED44F41F3EEFF800E21249 /* Products */,
 				568270D7ED183AC2ACEA6407 /* Pods */,
@@ -161,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53ED45011F3EEFF800E21249 /* LaunchScreen.storyboard in Resources */,
+				534B50201F47E5FA00666ACD /* Default-568h@2x.png in Resources */,
 				53ED44FE1F3EEFF800E21249 /* Assets.xcassets in Resources */,
 				53ED44FC1F3EEFF800E21249 /* Main.storyboard in Resources */,
 			);
@@ -360,6 +366,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yeokm1.BLE-Locator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/$(PROJECT_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -374,6 +381,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yeokm1.BLE-Locator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/$(PROJECT_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

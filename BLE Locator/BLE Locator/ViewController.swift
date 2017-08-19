@@ -63,22 +63,44 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             return
         }
 
-        //NSLog("%@: discovered %@, distance:%f", TAG, name, distance)
-        //let colour: String = components[1]
-        let ipAddr: String = components[2]
+        //let id: String = components[1]
+        let hostAddress: String = components[2]
         
-        sendPacket(ipAddress: ipAddr, distance: distance, maxDistance: MAX_DIST)
-        
-        
+        if let rpiIP = generateIPAddress(lastOctet: hostAddress){
+            sendPacket(ipAddress: rpiIP, distance: distance, maxDistance: MAX_DIST, red: 255, green: 255, blue: 255)
+        }
+    
+    }
+    
+    //We assumed RPi is on the same /24 subnet
+    func generateIPAddress(lastOctet: String) -> String? {
+        if let addr = getWiFiAddress() {
+            //print("iOS Wifi IP is " + addr)
+            
+            let addressComponents: [String] = addr.components(separatedBy: ".")
+            let myLastOctet: String = addressComponents[addressComponents.count - 1]
+            
+            let subnet: String = String(addr.characters.dropLast(myLastOctet.characters.count))
+            
+            //Combine our subnet with that of the Rpi host address
+            let rPiIP: String = subnet.appending(lastOctet)
+
+            return rPiIP
+        } else {
+            print("No WiFi address")
+            return nil
+        }
     }
     
     
-    func sendPacket(ipAddress: String, distance: Double, maxDistance: Double){
+    func sendPacket(ipAddress: String, distance: Double, maxDistance: Double, red: Int, green: Int, blue: Int){
         
         do{
         
-            let dataStr = String(format:"%0.2f", distance) + " " + String(maxDistance)
-        
+            let brightness: Double = distance / maxDistance
+            
+            let dataStr: String = String.localizedStringWithFormat("%@ %d %d %d", String(format:"%0.3f", brightness), red, green, blue)
+ 
 
             if let address: Socket.Address = Socket.createAddress(for: ipAddress, on: Int32(portNumber)){
                 try sendSocket?.write(from: dataStr, to: address)
@@ -89,6 +111,40 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             print("Error in sending \(error)")
         }
         
+    }
+    //Obtained from https://stackoverflow.com/a/30754194
+    func getWiFiAddress() -> String? {
+        var address : String?
+        
+        // Get list of all interfaces on the local machine:
+        var ifaddr : UnsafeMutablePointer<ifaddrs>?
+        guard getifaddrs(&ifaddr) == 0 else { return nil }
+        guard let firstAddr = ifaddr else { return nil }
+        
+        // For each interface ...
+        for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
+            let interface = ifptr.pointee
+            
+            // Check for IPv4 or IPv6 interface:
+            let addrFamily = interface.ifa_addr.pointee.sa_family
+            if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6) {
+                
+                // Check interface name:
+                let name = String(cString: interface.ifa_name)
+                if  name == "en0" {
+                    
+                    // Convert interface address to a human readable string:
+                    var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                    getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len),
+                                &hostname, socklen_t(hostname.count),
+                                nil, socklen_t(0), NI_NUMERICHOST)
+                    address = String(cString: hostname)
+                }
+            }
+        }
+        freeifaddrs(ifaddr)
+        
+        return address
     }
     
 
