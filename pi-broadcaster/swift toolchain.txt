@@ -20,7 +20,7 @@ chmod +x build_rpi_ubuntu_cross_compilation_toolchain
 
 
 
-Download 
+Download
 https://www.dropbox.com/s/kmu5p6j0otz3jyr/swift-3.0.2-RPi23-RaspbianNov16.tgz
 
 
@@ -99,3 +99,5 @@ sudo ldconfig
 
 scp ./.build/debug/PiBrc pi@192.168.1.102:/home/pi/
 
+
+SOCKET=/home/pi/socket.sock

@@ -11,8 +11,19 @@ let iBeaconUUID = Foundation.UUID(rawValue: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E
 
 var adapter: Adapter?
 var listenSocket: Socket?
+var unixSocketPath: String?
 
 let portNumber: Int = 55555
+
+unixSocketPath = ProcessInfo.processInfo.environment["SOCKET"]
+
+if unixSocketPath == nil {
+	print("Missing SOCKET environment variable")
+} else {
+	print("Unix socket to connect to LED changer is " + unixSocketPath!)
+}
+
+
 
 func cleanupBeforeExit(){
 	do {
