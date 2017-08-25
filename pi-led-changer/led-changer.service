@@ -1,0 +1,10 @@
+[Unit]
+Description=To start the LED Changer
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=idle
+RemainAfterExit=yes
+ExecStart=/home/pi/led-changer-startup.sh
