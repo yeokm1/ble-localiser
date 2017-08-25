@@ -16,8 +16,8 @@ class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
     
     let TAG = "BLEHandler"
     let BLE_DEVICE_FILTER: String = "pib"
-    let broadcasterDbAt1m: Double = -59.0
-    let numRSSIValuesToAverage: Int = 10
+    let broadcasterDbAt1m: Double = -60.0
+    let numRSSIValuesToAverage: Int = 5
 
     
     //CBCentralManager: To manage BLE operations

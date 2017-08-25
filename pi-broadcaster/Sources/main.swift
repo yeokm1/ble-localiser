@@ -11,6 +11,8 @@ let iBeaconUUID = Foundation.UUID(rawValue: "E2C56DB5-DFFB-48D2-B060-D0F5A71096E
 
 var adapter: Adapter?
 var listenSocket: Socket?
+var outUnixSocket: Socket?
+
 var unixSocketPath: String?
 
 let portNumber: Int = 55555
@@ -28,6 +30,7 @@ if unixSocketPath == nil {
 func cleanupBeforeExit(){
 	do {
 			listenSocket?.close()
+			outUnixSocket?.close()
 			try adapter?.enableAdvertising(false)
 	} catch {
 			print("Error disabling advertising")
@@ -107,6 +110,16 @@ do {
 		exit(2)
 }
 
+if unixSocketPath != nil {
+
+	do{
+		outUnixSocket = try Socket.create(family: Socket.ProtocolFamily.unix, type: Socket.SocketType.stream, proto: Socket.SocketProtocol.unix)
+		try outUnixSocket!.connect(to: unixSocketPath!)
+	} catch {
+	    print("Error in creating Unix Socket \(error)")
+	}
+}
+
 
 do {
 	listenSocket = try Socket.create(family: Socket.ProtocolFamily.inet, type: Socket.SocketType.datagram, proto: Socket.SocketProtocol.udp)
@@ -121,10 +134,13 @@ do {
 			print("From \(remoteHost):\(remotePort), data \(incomingStr)")
 		}
 
+		try outUnixSocket?.write(from: incomingData)
+
 	}
 
 
 } catch {
+  print("Error in getting data \(error)")
 	cleanupBeforeExit()
 	exit(3)
 }

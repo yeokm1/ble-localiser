@@ -68,8 +68,12 @@ while True:
                     red = components[1]
                     green = components[2]
                     blue = components[3]
-                    print("Received brightness={0}, red={1}, green={2}, red={3} ".format(brightness, red, green, blue))
-                    changeAllLEDState(float(brightness), int(red), int(green), int(blue))
+                    try:
+                        print("Received brightness={0}, red={1}, green={2}, red={3} ".format(brightness, red, green, blue))
+                        changeAllLEDState(float(brightness), int(red), int(green), int(blue))
+                    except ValueError as e:
+                        print(e)
+
                 else:
                     print("Cannot parse this: %s" % strData)
 
