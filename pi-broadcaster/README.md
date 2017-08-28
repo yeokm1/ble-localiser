@@ -24,16 +24,37 @@ Look at [swift-toolchain-setup.md](swift-toolchain-setup.md)
 
 ## App Compilation and Setup Steps
 
-On host machine
+### Add Bluetooth headers on host machine (one-time step)
+
+We need to add headers to the `/usr/include` but this directory is protected by System Integrity Protection (SIP). We have to disable that first
+
+1. Boot to recovery mode by pressing CMD+R on startup
+2. OS X Utilities > Terminal
+3. Type `csrutil disable`
+4. Reboot the machine
+5. Open terminal and run the following
+```bash
+git clone https://github.com/PureSwift/CSwiftBluetoothLinux
+sudo cp -r swiftbluetooth /usr/include
+```
+6. Enable SIP by repeating steps 1-4 except with `csrutil enable`
+
+### Build on host machine
 
 ```bash
 /Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2017-05-09-a.xctoolchain/usr/bin/swift build --destination ~/swift-toolchain/cross-toolchain/rpi-ubuntu-xenial-destination.json
 scp brc-startup.sh brc.service .build/debug/PiBrc  pi@X.X.X.X:/home/pi/
 ```
 
-On Pi
+### On Pi
+
+To just run:
 ```bash
-# Make program start on boot
+sudo SOCKET=/home/pi/socket.sock ./PiBrc
+```
+
+Make program start on boot:
+```bash
 chmod +x brc-startup.sh
 sudo mv brc.service /etc/systemd/system/
 sudo systemctl enable brc.service
