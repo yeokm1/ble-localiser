@@ -1,3 +1,0 @@
-sudo apt install clang-3.8 libicu-dev libcurl4-nss-dev git
-
-clang or clang-3.8
