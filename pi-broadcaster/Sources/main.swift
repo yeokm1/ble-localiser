@@ -116,7 +116,7 @@ if unixSocketPath != nil {
 		outUnixSocket = try Socket.create(family: Socket.ProtocolFamily.unix, type: Socket.SocketType.stream, proto: Socket.SocketProtocol.unix)
 		try outUnixSocket!.connect(to: unixSocketPath!)
 	} catch {
-	    print("Error in creating Unix Socket \(error)")
+	    print("Error in creating/connecting to Unix Socket \(error)")
 	}
 }
 
