@@ -4,9 +4,8 @@ Swift program that runs on the RPi that broadcasts via BLE and listens to port 5
 
 ## Swift setup steps on RPi
 
-Download [swift-3.0.2-RPi23-RaspbianNov16.tgz](https://www.dropbox.com/s/kmu5p6j0otz3jyr/swift-3.0.2-RPi23-RaspbianNov16.tgz) and upload it to the RPi like so: `scp swift-3.0.2-RPi23-RaspbianNov16.tgz pi@X.X.X.X:/home/pi/`
-
 ```bash
+wget https://www.dropbox.com/s/kmu5p6j0otz3jyr/swift-3.0.2-RPi23-RaspbianNov16.tgz
 sudo tar -xvf swift-3.0.2-RPi23-RaspbianNov16.tgz -C /
 sudo nano /etc/ld.so.conf.d/swift.conf
 
@@ -17,6 +16,10 @@ sudo nano /etc/ld.so.conf.d/swift.conf
 #
 
 sudo ldconfig
+
+# Install extra dependency
+wget http://ftp.us.debian.org/debian/pool/main/i/icu/libicu52_52.1-8+deb8u5_armhf.deb
+sudo dpkg -i libicu52_52.1-8+deb8u5_armhf.deb
 ```
 
 ## Swift Toolchain Setup
@@ -45,7 +48,7 @@ sudo cp -r swiftbluetooth /usr/include/swiftbluetooth
 ### Build on host machine
 
 ```bash
-/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2017-05-09-a.xctoolchain/usr/bin/swift build --destination ~/swift-toolchain/cross-toolchain/rpi-ubuntu-xenial-destination.json
+swift build --destination ~/swift-toolchain/cross-toolchain/rpi-ubuntu-xenial-destination.json
 scp brc-startup.sh brc.service .build/debug/PiBrc  pi@X.X.X.X:/home/pi/
 ```
 

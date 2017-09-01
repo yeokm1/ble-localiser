@@ -98,6 +98,8 @@ sudo cp ~/swift-toolchain/swift-package-manager/.build/debug/swift-build /Librar
 ```bash
 cd your-project-directory
 swift build --destination /tmp/cross-toolchain/rpi-ubuntu-xenial-destination.json
+# or
+/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2017-05-09-a.xctoolchain/usr/bin/swift build --destination /tmp/cross-toolchain/rpi-ubuntu-xenial-destination.json
 ```
 
 
