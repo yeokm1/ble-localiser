@@ -15,7 +15,8 @@ scp led-changer.py led-changer.service led-changer-startup.sh pi@X.X.X.X:/home/p
 One time dependency setup:
 
 ```bash
-sudo apt-get install python-pip python-dev
+sudo apt update
+sudo apt install python-pip python-dev
 sudo pip install unicornhat
 ```
 
