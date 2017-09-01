@@ -34,8 +34,11 @@ We need to add headers to the `/usr/include` but this directory is protected by 
 4. Reboot the machine
 5. Open terminal and run the following
 ```bash
+# Change to any working directory
 git clone https://github.com/PureSwift/CSwiftBluetoothLinux
-sudo cp -r swiftbluetooth /usr/include
+sudo mkdir -p /usr/include/swiftbluetooth
+cd CSwiftBluetoothLinux
+sudo cp -r swiftbluetooth /usr/include/swiftbluetooth
 ```
 6. Enable SIP by repeating steps 1-4 except with `csrutil enable`
 
