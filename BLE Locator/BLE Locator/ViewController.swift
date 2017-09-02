@@ -13,9 +13,8 @@ import Socket
 class ViewController: UIViewController, BLEHandlerDelegate{
     
     let TAG: String = "ViewController"
-    let MAX_DIST: Double = 1.0
-    let MIN_BRIGHTNESS: Double = 0.2
-    let BRIGHTNESS_RANGE: Double = 0.5
+    let MAX_DIST: Double = 3.0
+    let NUM_LEDS: Int = 64
     
     var bleHandler: BLEHandler!
     
@@ -69,7 +68,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         let hostAddress: String = components[2]
         
         if let rpiIP = generateIPAddress(lastOctet: hostAddress){
-            sendPacket(ipAddress: rpiIP, distance: distance, maxDistance: MAX_DIST, red: 0, green: 255, blue: 0)
+            sendPacket(ipAddress: rpiIP, distance: distance, maxDistance: MAX_DIST, red: 0, green: 7, blue: 0)
         }
     
     }
@@ -98,13 +97,17 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     func sendPacket(ipAddress: String, distance: Double, maxDistance: Double, red: Int, green: Int, blue: Int){
         
         do{
+            
+
+            
+            var ledsToTurnOn: Int = Int(((maxDistance - distance) / maxDistance) * Double(NUM_LEDS))
         
-            let brightnessRatio: Double = (maxDistance - distance) / maxDistance
+            if ledsToTurnOn > NUM_LEDS {
+                ledsToTurnOn = NUM_LEDS
+            }
+
             
-            let brightness: Double = (brightnessRatio * BRIGHTNESS_RANGE) + MIN_BRIGHTNESS
-            
-            
-            let dataStr: String = String.localizedStringWithFormat("%@ %d %d %d", String(format:"%0.3f", brightness), red, green, blue)
+            let dataStr: String = String.localizedStringWithFormat("%d %d %d %d", ledsToTurnOn, red, green, blue)
  
 
             if let address: Socket.Address = Socket.createAddress(for: ipAddress, on: Int32(portNumber)){
