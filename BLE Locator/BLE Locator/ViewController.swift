@@ -13,7 +13,6 @@ import Socket
 class ViewController: UIViewController, BLEHandlerDelegate{
     
     let TAG: String = "ViewController"
-    let MAX_DIST: Double = 3.0
     let NUM_LEDS: Int = 64
     
     var bleHandler: BLEHandler!
@@ -23,18 +22,27 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     var sendSocket: Socket?
     
     var brightness: Int = 0
+    var maxDistance: Double = 5.0
     
     @IBOutlet weak var bleScanSwitch: UISwitch!
+    
     @IBOutlet weak var brightnessStepper: UIStepper!
     @IBOutlet weak var brightnessValueLabel: UILabel!
+    
+    @IBOutlet weak var maxDistanceSlider: UISlider!
+    @IBOutlet weak var maxDistanceValueLabel: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         bleScanSwitch.addTarget(self, action: #selector(bleScanSwitchValueDidChange), for: .valueChanged)
         brightnessStepper.addTarget(self, action: #selector(brightnessStepperValueDidChange), for: .valueChanged)
+        
+        maxDistanceSlider.addTarget(self, action: #selector(distanceSliderValueDidChange), for: .valueChanged)
 
         brightnessStepperValueDidChange(sender: brightnessStepper)
+        distanceSliderValueDidChange(sender: maxDistanceSlider)
         
         //Start BLEHandler and ask it to pass callbacks to UI (here)
         bleHandler = BLEHandler(delegate: self)
@@ -65,6 +73,14 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         brightness = Int(sender.value)
         brightnessValueLabel.text = String(brightness)
     }
+    
+    
+    func distanceSliderValueDidChange(sender: UISlider){
+        maxDistance = Double(sender.value)
+        maxDistanceValueLabel.text = String(format: "%.1f", maxDistance)
+    }
+    
+    
 
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -95,7 +111,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         let hostAddress: String = components[2]
         
         if let rpiIP = generateIPAddress(lastOctet: hostAddress){
-            sendPacket(ipAddress: rpiIP, distance: distance, maxDistance: MAX_DIST, red: 0, green: 0, blue: brightness)
+            sendPacket(ipAddress: rpiIP, distance: distance, maxDistance: maxDistance, red: 0, green: 0, blue: brightness)
         }
     
     }
