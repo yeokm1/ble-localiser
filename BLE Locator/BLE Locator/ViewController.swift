@@ -32,6 +32,9 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     @IBOutlet weak var maxDistanceSlider: UISlider!
     @IBOutlet weak var maxDistanceValueLabel: UILabel!
     
+    
+    let piColourAssigment: Dictionary<String, Array<Int>> = ["B3": [1,0,0], "39": [0, 1, 0], "27": [0, 0, 1]]
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,11 +110,17 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             return
         }
 
-        //let id: String = components[1]
+        let id: String = components[1]
         let hostAddress: String = components[2]
         
+        var colourAssignment: Array<Int>? = piColourAssigment[id]
+        
+        if colourAssignment == nil {
+            colourAssignment = [1,1,1]
+        }
+        
         if let rpiIP = generateIPAddress(lastOctet: hostAddress){
-            sendPacket(ipAddress: rpiIP, distance: distance, maxDistance: maxDistance, red: 0, green: 0, blue: brightness)
+            sendPacket(ipAddress: rpiIP, distance: distance, maxDistance: maxDistance, red: colourAssignment![0] * brightness, green: colourAssignment![1] * brightness, blue: colourAssignment![2] * brightness)
         }
     
     }
