@@ -82,7 +82,7 @@ class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
             
             let distance = calculateDistance(rssi: avgRSSI)
             
-            delegate.newDeviceScanned(name: localName!, uuid: peripheral.identifier, distance: distance, advertisementData: advertisementData as [NSObject : AnyObject]!)
+            delegate.newDeviceScanned(name: localName!, uuid: peripheral.identifier, rssi: avgRSSI, distance: distance, advertisementData: advertisementData as [NSObject : AnyObject]!)
             
         }
         

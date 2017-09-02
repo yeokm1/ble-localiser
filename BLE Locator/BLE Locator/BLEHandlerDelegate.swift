@@ -12,6 +12,6 @@ import CoreBluetooth
 
 protocol BLEHandlerDelegate {
     
-    func newDeviceScanned(name : String, uuid: UUID, distance : Double, advertisementData : [NSObject : AnyObject]!)
+    func newDeviceScanned(name : String, uuid: UUID, rssi: Double, distance : Double, advertisementData : [NSObject : AnyObject]!)
 
 }

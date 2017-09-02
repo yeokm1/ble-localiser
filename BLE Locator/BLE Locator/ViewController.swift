@@ -82,7 +82,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     
     //BLEHandlerDelegate
     
-    func newDeviceScanned(name: String, uuid: UUID, distance: Double, advertisementData: [NSObject : AnyObject]!) {
+    func newDeviceScanned(name: String, uuid: UUID, rssi: Double, distance: Double, advertisementData: [NSObject : AnyObject]!) {
     
         
         let components: [String] = name.components(separatedBy: "-")
