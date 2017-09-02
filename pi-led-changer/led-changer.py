@@ -8,6 +8,9 @@ import unicornhat as unicorn
 
 socketEnvVar = "SOCKET"
 
+rowLength = 8
+maxNumber = 64
+
 server_address = os.environ.get(socketEnvVar)
 
 unicorn.set_layout(unicorn.AUTO)
@@ -18,16 +21,26 @@ if not server_address:
     print("Environment variable " + socketEnvVar + " not set")
     exit()
 
-def changeAllLEDState(brightness, red, green, blue):
-    for y in range(height):
-        for x in range(width):
-            unicorn.set_pixel(x, y, red, green, blue)
+def changeAllLEDState(number, red, green, blue):
 
-    if brightness < 0.0 or brightness > 1.0:
-        print("Brightness level {0} out of range".format(brightness))
+    if number < 0 or number > maxNumber:
+        print ("Out of range number %d" % number)
         return
 
-    unicorn.brightness(brightness)
+    # To convert to zero-based scheme
+    number = number - 1
+
+    for y in range(height):
+        for x in range(width):
+
+            oneDNumber = y * rowLength + x
+
+            if oneDNumber <= number:
+                unicorn.set_pixel(x, y, red, green, blue)
+            else:
+                unicorn.set_pixel(x, y, 0, 0, 0)
+
+
     unicorn.show()
 
 # Make sure the socket does not already exist
@@ -40,7 +53,8 @@ except OSError:
 sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 
 print ("LED changer started")
-changeAllLEDState(0.2, 255, 255, 255)
+unicorn.brightness(1)
+changeAllLEDState(1, 7, 7, 7)
 
 sock.bind(server_address)
 
@@ -64,13 +78,13 @@ while True:
                 components = strData.split()
 
                 if len(components) == 4:
-                    brightness = components[0]
+                    number = components[0]
                     red = components[1]
                     green = components[2]
                     blue = components[3]
                     try:
-                        print("Received brightness={0}, red={1}, green={2}, red={3} ".format(brightness, red, green, blue))
-                        changeAllLEDState(float(brightness), int(red), int(green), int(blue))
+                        print("Received number={0}, red={1}, green={2}, red={3} ".format(number, red, green, blue))
+                        changeAllLEDState(int(number), int(red), int(green), int(blue))
                     except ValueError as e:
                         print(e)
 
