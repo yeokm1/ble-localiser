@@ -22,12 +22,19 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     
     var sendSocket: Socket?
     
+    var brightness: Int = 0
+    
     @IBOutlet weak var bleScanSwitch: UISwitch!
+    @IBOutlet weak var brightnessStepper: UIStepper!
+    @IBOutlet weak var brightnessValueLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         bleScanSwitch.addTarget(self, action: #selector(bleScanSwitchValueDidChange), for: .valueChanged)
+        brightnessStepper.addTarget(self, action: #selector(brightnessStepperValueDidChange), for: .valueChanged)
+
+        brightnessStepperValueDidChange(sender: brightnessStepper)
         
         //Start BLEHandler and ask it to pass callbacks to UI (here)
         bleHandler = BLEHandler(delegate: self)
@@ -43,9 +50,9 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         
     }
     
-    func bleScanSwitchValueDidChange(sender:UISwitch!) {
+    func bleScanSwitchValueDidChange(sender:UISwitch) {
         
-        if bleScanSwitch.isOn {
+        if sender.isOn {
             bleHandler.bleScan(start: true)
         } else {
             bleHandler.bleScan(start: false)
@@ -53,6 +60,11 @@ class ViewController: UIViewController, BLEHandlerDelegate{
 
     }
     
+    
+    func brightnessStepperValueDidChange(sender: UIStepper){
+        brightness = Int(sender.value)
+        brightnessValueLabel.text = String(brightness)
+    }
 
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -83,7 +95,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         let hostAddress: String = components[2]
         
         if let rpiIP = generateIPAddress(lastOctet: hostAddress){
-            sendPacket(ipAddress: rpiIP, distance: distance, maxDistance: MAX_DIST, red: 0, green: 7, blue: 0)
+            sendPacket(ipAddress: rpiIP, distance: distance, maxDistance: MAX_DIST, red: 0, green: 0, blue: brightness)
         }
     
     }
