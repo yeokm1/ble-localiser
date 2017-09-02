@@ -22,9 +22,12 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     
     var sendSocket: Socket?
     
+    @IBOutlet weak var bleScanSwitch: UISwitch!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bleScanSwitch.addTarget(self, action: #selector(bleScanSwitchValueDidChange), for: .valueChanged)
         
         //Start BLEHandler and ask it to pass callbacks to UI (here)
         bleHandler = BLEHandler(delegate: self)
@@ -35,10 +38,22 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             print("Error creating socket \(error)")
         }
         
-        //scheduledTimerWithTimeInterval()
-        bleHandler.bleScan(start: true)
+
+
         
     }
+    
+    func bleScanSwitchValueDidChange(sender:UISwitch!) {
+        
+        if bleScanSwitch.isOn {
+            bleHandler.bleScan(start: true)
+        } else {
+            bleHandler.bleScan(start: false)
+        }
+
+    }
+    
+
     
     override func viewDidDisappear(_ animated: Bool) {
         sendSocket?.close()

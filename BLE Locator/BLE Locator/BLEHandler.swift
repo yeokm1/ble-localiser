@@ -109,7 +109,6 @@ class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
         }
         else if (central.state.rawValue == CBManagerState.poweredOn.rawValue) {
             NSLog("%@ CoreBluetooth BLE hardware is powered on and ready", TAG);
-            bleScan(start: true)
         }
         else if (central.state.rawValue == CBManagerState.unauthorized.rawValue) {
             NSLog("%@ CoreBluetooth BLE state is unauthorized", TAG);
