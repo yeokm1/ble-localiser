@@ -33,8 +33,15 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     @IBOutlet weak var maxDistanceValueLabel: UILabel!
     
     
+    @IBOutlet weak var redStatusLabel: UILabel!
+    @IBOutlet weak var greenStatusLabel: UILabel!
+    @IBOutlet weak var blueStatusLabel: UILabel!
+    
+    
     let piColourAssigment: Dictionary<String, Array<Int>> = ["B3": [1,0,0], "39": [0, 1, 0], "27": [0, 0, 1]]
     let piIPAddrAssigment: Dictionary<String, String> = ["B3": "192.168.2.19", "39": "192.168.2.162", "27": "192.168.2.186"]
+    
+    var labelAssignment: Dictionary<String, UILabel> = Dictionary<String, UILabel>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +51,10 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         
         maxDistanceSlider.addTarget(self, action: #selector(distanceSliderValueDidChange), for: .valueChanged)
 
+        labelAssignment["B3"] = redStatusLabel
+        labelAssignment["39"] = greenStatusLabel
+        labelAssignment["27"] = blueStatusLabel
+        
         brightnessStepperValueDidChange(sender: brightnessStepper)
         distanceSliderValueDidChange(sender: maxDistanceSlider)
         
@@ -118,11 +129,29 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             colourAssignment = [1,1,1]
         }
         
+    
+        if let labelToUpdate = labelAssignment[id]{
+            DispatchQueue.main.async {
+                
+                let newText: String = self.generateStatusLabelText(distance: distance, rssi: rssi)
+                labelToUpdate.text = newText
+            
+            }
+                
+        }
+
+        
+        
         if let ipAddrAssignment = piIPAddrAssigment[id] {
             sendPacket(ipAddress: ipAddrAssignment, distance: distance, maxDistance: maxDistance, red: colourAssignment![0] * brightness, green: colourAssignment![1] * brightness, blue: colourAssignment![2] * brightness)
         }
         
     
+    }
+    
+    func generateStatusLabelText(distance: Double, rssi: Double) -> String{
+        let output: String = String(format: "%.2fm, %.0fdbm", distance, rssi)
+        return output
     }
     
     

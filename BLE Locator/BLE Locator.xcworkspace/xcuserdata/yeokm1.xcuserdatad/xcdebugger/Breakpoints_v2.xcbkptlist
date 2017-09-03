@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLE Locator/ViewController.swift"
-            timestampString = "526048279.369899"
+            timestampString = "526137850.418121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "newDeviceScanned(name:uuid:rssi:distance:advertisementData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLE Locator/ViewController.swift"
-            timestampString = "526048279.369899"
+            timestampString = "526137850.418121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "newDeviceScanned(name:uuid:rssi:distance:advertisementData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLE Locator/ViewController.swift"
-            timestampString = "526048279.369899"
+            timestampString = "526137850.418121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "newDeviceScanned(name:uuid:rssi:distance:advertisementData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLE Locator/ViewController.swift"
-            timestampString = "526115264.823529"
+            timestampString = "526137850.418121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "sendPacket(ipAddress:distance:maxDistance:red:green:blue:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLE Locator/ViewController.swift"
-            timestampString = "526048279.369899"
+            timestampString = "526137850.418121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "newDeviceScanned(name:uuid:rssi:distance:advertisementData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -192,6 +192,22 @@
             startingLineNumber = "73"
             endingLineNumber = "73"
             landmarkName = "centralManager(_:didDiscover:advertisementData:rssi:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BLE Locator/ViewController.swift"
+            timestampString = "526137814.025733"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "newDeviceScanned(name:uuid:rssi:distance:advertisementData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
