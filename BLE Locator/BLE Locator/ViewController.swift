@@ -34,7 +34,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     
     
     let piColourAssigment: Dictionary<String, Array<Int>> = ["B3": [1,0,0], "39": [0, 1, 0], "27": [0, 0, 1]]
-    
+    let piIPAddrAssigment: Dictionary<String, String> = ["B3": "192.168.2.19", "39": "192.168.2.162", "27": "192.168.2.186"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,12 +106,11 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         
         let components: [String] = name.components(separatedBy: "-")
         
-        if components.count != 3{
+        if components.count < 2{
             return
         }
 
         let id: String = components[1]
-        let hostAddress: String = components[2]
         
         var colourAssignment: Array<Int>? = piColourAssigment[id]
         
@@ -119,30 +118,11 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             colourAssignment = [1,1,1]
         }
         
-        if let rpiIP = generateIPAddress(lastOctet: hostAddress){
-            sendPacket(ipAddress: rpiIP, distance: distance, maxDistance: maxDistance, red: colourAssignment![0] * brightness, green: colourAssignment![1] * brightness, blue: colourAssignment![2] * brightness)
+        if let ipAddrAssignment = piIPAddrAssigment[id] {
+            sendPacket(ipAddress: ipAddrAssignment, distance: distance, maxDistance: maxDistance, red: colourAssignment![0] * brightness, green: colourAssignment![1] * brightness, blue: colourAssignment![2] * brightness)
         }
+        
     
-    }
-    
-    //We assumed RPi is on the same /24 subnet
-    func generateIPAddress(lastOctet: String) -> String? {
-        if let addr = getWiFiAddress() {
-            //print("iOS Wifi IP is " + addr)
-            
-            let addressComponents: [String] = addr.components(separatedBy: ".")
-            let myLastOctet: String = addressComponents[addressComponents.count - 1]
-            
-            let subnet: String = String(addr.characters.dropLast(myLastOctet.characters.count))
-            
-            //Combine our subnet with that of the Rpi host address
-            let rPiIP: String = subnet.appending(lastOctet)
-
-            return rPiIP
-        } else {
-            print("No WiFi address")
-            return nil
-        }
     }
     
     
@@ -171,42 +151,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             print("Error in sending \(error)")
         }
         
-    }
-    //Obtained from https://stackoverflow.com/a/30754194
-    func getWiFiAddress() -> String? {
-        var address : String?
-        
-        // Get list of all interfaces on the local machine:
-        var ifaddr : UnsafeMutablePointer<ifaddrs>?
-        guard getifaddrs(&ifaddr) == 0 else { return nil }
-        guard let firstAddr = ifaddr else { return nil }
-        
-        // For each interface ...
-        for ifptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
-            let interface = ifptr.pointee
-            
-            // Check for IPv4 or IPv6 interface:
-            let addrFamily = interface.ifa_addr.pointee.sa_family
-            if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6) {
-                
-                // Check interface name:
-                let name = String(cString: interface.ifa_name)
-                if  name == "en0" {
-                    
-                    // Convert interface address to a human readable string:
-                    var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
-                    getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len),
-                                &hostname, socklen_t(hostname.count),
-                                nil, socklen_t(0), NI_NUMERICHOST)
-                    address = String(cString: hostname)
-                }
-            }
-        }
-        freeifaddrs(ifaddr)
-        
-        return address
-    }
-    
+    }    
 
 }
 

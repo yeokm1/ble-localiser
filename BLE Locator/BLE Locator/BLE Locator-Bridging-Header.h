@@ -8,6 +8,5 @@
 
 #ifndef BLE_Locator_Bridging_Header_h
 #define BLE_Locator_Bridging_Header_h
-#include <ifaddrs.h>
 
 #endif /* BLE_Locator_Bridging_Header_h */
