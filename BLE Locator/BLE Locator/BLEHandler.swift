@@ -70,7 +70,7 @@ class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
             let peripheralUUID: UUID = peripheral.identifier
             
             if foundDevices[peripheralUUID] == nil {
-                print("New device found")
+                print("New device found " + localName!)
                 foundDevices[peripheralUUID] = FixedQueue(maxSize: numRSSIValuesToAverage)
             }
             
