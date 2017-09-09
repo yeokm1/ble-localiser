@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		534B50201F47E5FA00666ACD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 534B501F1F47E5FA00666ACD /* Default-568h@2x.png */; };
+		53C4844B1F63EFC20055C912 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C4844A1F63EFC20055C912 /* HelperFunctions.swift */; };
 		53ED44F71F3EEFF800E21249 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED44F61F3EEFF800E21249 /* AppDelegate.swift */; };
 		53ED44F91F3EEFF800E21249 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED44F81F3EEFF800E21249 /* ViewController.swift */; };
 		53ED44FC1F3EEFF800E21249 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53ED44FA1F3EEFF800E21249 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		534B501F1F47E5FA00666ACD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		534B50211F47E6E100666ACD /* BLE Locator-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BLE Locator-Bridging-Header.h"; path = "BLE Locator/BLE Locator-Bridging-Header.h"; sourceTree = "<group>"; };
+		53C4844A1F63EFC20055C912 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		53ED44F31F3EEFF800E21249 /* BLE Locator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BLE Locator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53ED44F61F3EEFF800E21249 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53ED44F81F3EEFF800E21249 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				53ED44F81F3EEFF800E21249 /* ViewController.swift */,
 				53ED45021F3EEFF800E21249 /* Info.plist */,
 				53ED45081F3EF7BE00E21249 /* BLEHandler.swift */,
+				53C4844A1F63EFC20055C912 /* HelperFunctions.swift */,
 				53ED450A1F3EF8A600E21249 /* BLEHandlerDelegate.swift */,
 				53ED450C1F3F4A5300E21249 /* FixedQueue.swift */,
 			);
@@ -238,6 +241,7 @@
 				53ED44F71F3EEFF800E21249 /* AppDelegate.swift in Sources */,
 				53ED450B1F3EF8A600E21249 /* BLEHandlerDelegate.swift in Sources */,
 				53ED450D1F3F4A5300E21249 /* FixedQueue.swift in Sources */,
+				53C4844B1F63EFC20055C912 /* HelperFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

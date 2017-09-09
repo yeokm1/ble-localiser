@@ -241,6 +241,19 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             circleView.frame = newCircleData.rect
             circleView.layer.cornerRadius = newCircleData.cornerRadius
         }
+        
+        let newPositionLabelPos = generateLocation(tx1: piPositionAssignment[redMacAddress]![0],
+                                                   ty1: piPositionAssignment[redMacAddress]![1],
+                                                   tx2: piPositionAssignment[greenMacAddress]![0],
+                                                   ty2: piPositionAssignment[greenMacAddress]![1],
+                                                   tx3: piPositionAssignment[blueMacAddress]![0],
+                                                   ty3: piPositionAssignment[blueMacAddress]![1],
+                                                   s1: distanceFromPis[redMacAddress]!,
+                                                   s2: distanceFromPis[greenMacAddress]!,
+                                                   s3: distanceFromPis[blueMacAddress]!)
+        
+        
+        placePositionLabel(xPosM: newPositionLabelPos.x, yPosM: newPositionLabelPos.y)
     }
     
     
