@@ -110,6 +110,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcH-bx-37I">
+                                <rect key="frame" x="20" y="10" width="300" height="300"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.86346340673575128" green="0.86346340673575128" blue="0.86346340673575128" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -119,6 +125,7 @@
                         <outlet property="brightnessStepper" destination="cn4-hK-f8j" id="mcr-gz-K4M"/>
                         <outlet property="brightnessValueLabel" destination="hgI-dK-osD" id="8lu-Uk-VcF"/>
                         <outlet property="greenStatusLabel" destination="Tuk-9S-gaC" id="Mlb-Rt-Rk7"/>
+                        <outlet property="mapOfBeaconsView" destination="lcH-bx-37I" id="8OY-wE-N5f"/>
                         <outlet property="maxDistanceSlider" destination="j4K-cN-oVN" id="f8s-Mm-oEz"/>
                         <outlet property="maxDistanceValueLabel" destination="qdE-RK-p2E" id="bjX-NK-jLs"/>
                         <outlet property="redStatusLabel" destination="s2z-Dr-cEy" id="MED-cA-12n"/>

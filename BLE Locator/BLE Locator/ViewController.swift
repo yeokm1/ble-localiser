@@ -37,6 +37,11 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     @IBOutlet weak var greenStatusLabel: UILabel!
     @IBOutlet weak var blueStatusLabel: UILabel!
     
+    @IBOutlet weak var mapOfBeaconsView: UIView!
+    
+    let rpiWidth: Double = 20
+    let rpiHeight: Double = 10
+    let pixelPerMeter: Double = 75
     
     let piColourAssigment: Dictionary<String, Array<Int>> = ["B3": [1,0,0], "39": [0, 1, 0], "27": [0, 0, 1]]
     let piIPAddrAssigment: Dictionary<String, String> = ["B3": "192.168.2.19", "39": "192.168.2.162", "27": "192.168.2.186"]
@@ -58,6 +63,17 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         brightnessStepperValueDidChange(sender: brightnessStepper)
         distanceSliderValueDidChange(sender: maxDistanceSlider)
         
+        
+        let redPiView = createRPiView(xPosM: 0, yPosM: 0.435, colour: UIColor.red)
+        mapOfBeaconsView.addSubview(redPiView)
+        
+        let greenPiView = createRPiView(xPosM: -0.5, yPosM: -0.435, colour: UIColor.green)
+        mapOfBeaconsView.addSubview(greenPiView)
+        
+        let bluePiView = createRPiView(xPosM: 0.5, yPosM: -0.435, colour: UIColor.blue)
+        mapOfBeaconsView.addSubview(bluePiView)
+        
+        
         //Start BLEHandler and ask it to pass callbacks to UI (here)
         bleHandler = BLEHandler(delegate: self)
         
@@ -66,9 +82,25 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         } catch {
             print("Error creating socket \(error)")
         }
+    
         
+    }
+    
+    func generatePositionBasedOnCenterOfMap(xPosM: Double, yPosM: Double) -> (Double, Double){
+        //Our coordinate system assumes origin is bottom left however UIView is based on top left
+        //y coordinate has to be adjusted as a result
+        return (Double(mapOfBeaconsView.frame.width / 2) + (xPosM * pixelPerMeter), Double(mapOfBeaconsView.frame.height) - (Double(mapOfBeaconsView.frame.height / 2) + (yPosM * pixelPerMeter)))
+    }
+    
+    func createRPiView(xPosM: Double, yPosM: Double, colour: UIColor) -> UIView {
+        
+        let centeredCoord = generatePositionBasedOnCenterOfMap(xPosM: xPosM, yPosM: yPosM)
+        
+        let newView = UIView(frame: CGRect(x: centeredCoord.0 - (rpiWidth / 2), y: centeredCoord.1 - (rpiHeight / 2), width: rpiWidth, height: rpiHeight))
 
-
+        newView.backgroundColor = colour
+        
+        return newView
         
     }
     
