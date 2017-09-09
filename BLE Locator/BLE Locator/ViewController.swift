@@ -45,6 +45,9 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     @IBOutlet weak var blueStatusLabel: UILabel!
     
     @IBOutlet weak var mapOfBeaconsView: UIView!
+    @IBOutlet weak var currentPositionLabel: UILabel!
+    
+    let positionLabelSize: Double = 20
     
     let maximumCirclePixelDiameter: Double = 250
     
@@ -107,10 +110,12 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         circleAssignment[blueMacAddress] = blueDistanceCircle
         mapOfBeaconsView.addSubview(blueDistanceCircle)
         
+        placePositionLabel(xPosM: 0, yPosM: 0)
         
         updateUIWithNewdata(id: redMacAddress, distance: initialDistanceFromPis, rssi: -100)
         updateUIWithNewdata(id: greenMacAddress, distance: initialDistanceFromPis, rssi: -100)
         updateUIWithNewdata(id: blueMacAddress, distance: initialDistanceFromPis, rssi: -100)
+    
         
         
         //Start BLEHandler and ask it to pass callbacks to UI (here)
@@ -122,6 +127,17 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             print("Error creating socket \(error)")
         }
     
+        
+    }
+    
+    func placePositionLabel(xPosM: Double, yPosM: Double){
+        
+        let centeredCoord = generatePositionBasedOnCenterOfMap(xPosM: xPosM, yPosM: yPosM)
+        
+        let newFramePosition = CGRect(x: centeredCoord.0 - (positionLabelSize / 2), y: centeredCoord.1 - (positionLabelSize / 2), width: positionLabelSize, height: positionLabelSize)
+        
+        
+        currentPositionLabel.frame = newFramePosition
         
     }
     
