@@ -24,6 +24,8 @@ sudo reboot
 
 Change all relevant settings but the most important is to enlarge file system and enable SSH. Change password if you need to.
 
+You might want to add `enable_uart=1` into `/boot/config.txt`. It has an added side effect of capping the CPU frequency to the minimum.
+
 5. Follow instructions to setup for [pi-led-changer](pi-led-changer/README.md)
 
 6. Follow instructions to setup for [pi-broadcaster](pi-broadcaster/README.md)
