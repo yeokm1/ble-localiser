@@ -15,6 +15,8 @@ let redMacAddress = "B3"
 let greenMacAddress = "39"
 let blueMacAddress = "27"
 
+let initialDistanceFromPis = 0.6
+
 class ViewController: UIViewController, BLEHandlerDelegate{
     
     let TAG: String = "ViewController"
@@ -49,6 +51,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     let rpiWidth: Double = 20
     let rpiHeight: Double = 10
     let pixelsPerMeter: Double = 60
+
     
 
     let piColourAssignment: Dictionary<String, Array<Int>> = [redMacAddress: [1,0,0], greenMacAddress: [0, 1, 0], blueMacAddress: [0, 0, 1]]
@@ -61,7 +64,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     var circleAssignment: Dictionary<String, UIView> = Dictionary<String, UIView>()
     
     
-    var distanceFromPis: Dictionary<String, Double> = [redMacAddress: 1.0, greenMacAddress: 1.0, blueMacAddress: 1.0]
+    var distanceFromPis: Dictionary<String, Double> = [redMacAddress: initialDistanceFromPis, greenMacAddress: initialDistanceFromPis, blueMacAddress: initialDistanceFromPis]
     
     
 
@@ -103,6 +106,11 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         let blueDistanceCircle = createCircleView(id: blueMacAddress, radius: distanceFromPis[blueMacAddress]!, colour: UIColor.blue)
         circleAssignment[blueMacAddress] = blueDistanceCircle
         mapOfBeaconsView.addSubview(blueDistanceCircle)
+        
+        
+        updateUIWithNewdata(id: redMacAddress, distance: initialDistanceFromPis, rssi: -100)
+        updateUIWithNewdata(id: greenMacAddress, distance: initialDistanceFromPis, rssi: -100)
+        updateUIWithNewdata(id: blueMacAddress, distance: initialDistanceFromPis, rssi: -100)
         
         
         //Start BLEHandler and ask it to pass callbacks to UI (here)
