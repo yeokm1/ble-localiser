@@ -44,9 +44,11 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     
     @IBOutlet weak var mapOfBeaconsView: UIView!
     
+    let maximumCirclePixelDiameter: Double = 250
+    
     let rpiWidth: Double = 20
     let rpiHeight: Double = 10
-    let pixelPerMeter: Double = 75
+    let pixelsPerMeter: Double = 60
     
 
     let piColourAssignment: Dictionary<String, Array<Int>> = [redMacAddress: [1,0,0], greenMacAddress: [0, 1, 0], blueMacAddress: [0, 0, 1]]
@@ -55,6 +57,11 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     let piPositionAssignment: Dictionary<String, Array<Double>> = [redMacAddress: [0, 0.435], greenMacAddress: [-0.5, -0.435], blueMacAddress: [0.5, -0.435]]
     
     var labelAssignment: Dictionary<String, UILabel> = Dictionary<String, UILabel>()
+    
+    var circleAssignment: Dictionary<String, UIView> = Dictionary<String, UIView>()
+    
+    
+    var distanceFromPis: Dictionary<String, Double> = [redMacAddress: 1.0, greenMacAddress: 1.0, blueMacAddress: 1.0]
     
     
 
@@ -66,9 +73,9 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         
         maxDistanceSlider.addTarget(self, action: #selector(distanceSliderValueDidChange), for: .valueChanged)
 
-        labelAssignment["B3"] = redStatusLabel
-        labelAssignment["39"] = greenStatusLabel
-        labelAssignment["27"] = blueStatusLabel
+        labelAssignment[redMacAddress] = redStatusLabel
+        labelAssignment[greenMacAddress] = greenStatusLabel
+        labelAssignment[blueMacAddress] = blueStatusLabel
         
         brightnessStepperValueDidChange(sender: brightnessStepper)
         distanceSliderValueDidChange(sender: maxDistanceSlider)
@@ -83,6 +90,20 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         let bluePiView = createRPiView(xPosM: piPositionAssignment[blueMacAddress]![0], yPosM: piPositionAssignment[blueMacAddress]![1], colour: UIColor.blue)
         mapOfBeaconsView.addSubview(bluePiView)
         
+   
+        
+        let redDistanceCircle = createCircleView(id: redMacAddress, radius: distanceFromPis[redMacAddress]!, colour: UIColor.red)
+        circleAssignment[redMacAddress] = redDistanceCircle
+        mapOfBeaconsView.addSubview(redDistanceCircle)
+        
+        let greenDistanceCircle = createCircleView(id: greenMacAddress, radius: distanceFromPis[greenMacAddress]!, colour: UIColor.green)
+        circleAssignment[greenMacAddress] = greenDistanceCircle
+        mapOfBeaconsView.addSubview(greenDistanceCircle)
+        
+        let blueDistanceCircle = createCircleView(id: blueMacAddress, radius: distanceFromPis[blueMacAddress]!, colour: UIColor.blue)
+        circleAssignment[blueMacAddress] = blueDistanceCircle
+        mapOfBeaconsView.addSubview(blueDistanceCircle)
+        
         
         //Start BLEHandler and ask it to pass callbacks to UI (here)
         bleHandler = BLEHandler(delegate: self)
@@ -96,10 +117,41 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         
     }
     
+    func createCircleView(id: String, radius: Double, colour: UIColor) -> UIView {
+        
+        let circleData = generateCGRectForCircle(id: id, radius: radius)
+        
+        let circle = UIView(frame: circleData.rect)
+        
+        circle.layer.cornerRadius = circleData.cornerRadius
+        circle.backgroundColor = colour
+        circle.alpha = 0.1
+        circle.clipsToBounds = true
+    
+        
+        return circle
+    }
+    
+    func generateCGRectForCircle(id: String, radius: Double) -> (rect: CGRect, cornerRadius: CGFloat){
+        let xPosM = piPositionAssignment[id]![0]
+        let yPosM = piPositionAssignment[id]![1]
+
+        let centeredCoord = generatePositionBasedOnCenterOfMap(xPosM: xPosM, yPosM: yPosM)
+        var pixelDiameter = radius * 2 * pixelsPerMeter
+        
+        if pixelDiameter > maximumCirclePixelDiameter {
+            pixelDiameter = maximumCirclePixelDiameter
+        }
+        
+        let rect = CGRect(x: centeredCoord.0 - (pixelDiameter / 2), y: centeredCoord.1 - (pixelDiameter / 2), width: pixelDiameter, height: pixelDiameter)
+        
+        return (rect: rect, cornerRadius: CGFloat(pixelDiameter / 2))
+    }
+    
     func generatePositionBasedOnCenterOfMap(xPosM: Double, yPosM: Double) -> (Double, Double){
         //Our coordinate system assumes origin is bottom left however UIView is based on top left
         //y coordinate has to be adjusted as a result
-        return (Double(mapOfBeaconsView.frame.width / 2) + (xPosM * pixelPerMeter), Double(mapOfBeaconsView.frame.height) - (Double(mapOfBeaconsView.frame.height / 2) + (yPosM * pixelPerMeter)))
+        return (Double(mapOfBeaconsView.frame.width / 2) + (xPosM * pixelsPerMeter), Double(mapOfBeaconsView.frame.height) - (Double(mapOfBeaconsView.frame.height / 2) + (yPosM * pixelsPerMeter)))
     }
     
     func createRPiView(xPosM: Double, yPosM: Double, colour: UIColor) -> UIView {
@@ -151,6 +203,23 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         // Dispose of any resources that can be recreated.
     }
     
+    func updateUIWithNewdata(id: String, distance: Double, rssi: Double){
+        
+        if let labelToUpdate = labelAssignment[id]{
+            let newText: String = generateStatusLabelText(distance: distance, rssi: rssi)
+            labelToUpdate.text = newText
+        }
+        
+        distanceFromPis[id] = distance
+        
+        if let circleView = circleAssignment[id]{
+            let newCircleData = generateCGRectForCircle(id: id, radius: distance)
+            circleView.frame = newCircleData.rect
+            circleView.layer.cornerRadius = newCircleData.cornerRadius
+        }
+    }
+    
+    
     
     //BLEHandlerDelegate
     
@@ -171,18 +240,11 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             colourAssignment = [1,1,1]
         }
         
-    
-        if let labelToUpdate = labelAssignment[id]{
-            DispatchQueue.main.async {
-                
-                let newText: String = self.generateStatusLabelText(distance: distance, rssi: rssi)
-                labelToUpdate.text = newText
-            
-            }
-                
+
+        DispatchQueue.main.async {
+            self.updateUIWithNewdata(id: id, distance: distance, rssi: rssi)
         }
 
-        
         
         if let ipAddrAssignment = piIPAddrAssignment[id] {
             sendPacket(ipAddress: ipAddrAssignment, distance: distance, maxDistance: maxDistance, red: colourAssignment![0] * brightness, green: colourAssignment![1] * brightness, blue: colourAssignment![2] * brightness)
@@ -200,8 +262,6 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     func sendPacket(ipAddress: String, distance: Double, maxDistance: Double, red: Int, green: Int, blue: Int){
         
         do{
-            
-
             
             var ledsToTurnOn: Int = Int(((maxDistance - distance) / maxDistance) * Double(NUM_LEDS))
         
