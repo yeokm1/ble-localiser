@@ -20,6 +20,7 @@ unicorn.rotation(0)
 width,height = unicorn.get_shape()
 
 initialPulseThreadShouldBeActive = True
+firstConnectionReceived = False
 
 if not server_address:
     print("Environment variable " + socketEnvVar + " not set")
@@ -51,17 +52,28 @@ def changeAllLEDState(number, red, green, blue):
 def pulseThread():
 
     global initialPulseThreadShouldBeActive
+    global firstConnectionReceived
     maxRange = 10
 
     while initialPulseThreadShouldBeActive:
-        for r in range(0, maxRange):
-            for g in range(0, maxRange):
-                for b in range(0, maxRange):
-                    if initialPulseThreadShouldBeActive:
-                        changeAllLEDState(1, r, g, b)
-                        time.sleep(0.05)
-                    else:
-                        break
+
+        if firstConnectionReceived:
+            for r in range(0, maxRange):
+                for g in range(0, maxRange):
+                    for b in range(0, maxRange):
+                        if initialPulseThreadShouldBeActive:
+                            changeAllLEDState(1, r, g, b)
+                            time.sleep(0.1)
+                        else:
+                            break
+        else:
+            for brightness in range(0, maxRange):
+                if initialPulseThreadShouldBeActive:
+                    changeAllLEDState(1, brightness, brightness, brightness)
+                    time.sleep(0.1)
+                else:
+                    break
+
 
 
 # Make sure the socket does not already exist
@@ -89,6 +101,8 @@ while True:
     print ('waiting for a connection')
     connection, client_address = sock.accept()
     print ('connection from %s' % client_address)
+    firstConnectionReceived = True
+
     try:
 
         while True:
