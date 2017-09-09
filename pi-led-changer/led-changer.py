@@ -3,6 +3,8 @@
 import socket
 import sys
 import os
+import thread
+import time
 
 import unicornhat as unicorn
 
@@ -16,6 +18,8 @@ server_address = os.environ.get(socketEnvVar)
 unicorn.set_layout(unicorn.AUTO)
 unicorn.rotation(0)
 width,height = unicorn.get_shape()
+
+initialPulseThreadShouldBeActive = True
 
 if not server_address:
     print("Environment variable " + socketEnvVar + " not set")
@@ -43,6 +47,20 @@ def changeAllLEDState(number, red, green, blue):
 
     unicorn.show()
 
+
+def pulseThread():
+
+    global initialPulseThreadShouldBeActive
+    maxRange = 10
+
+    while initialPulseThreadShouldBeActive:
+        for r in range(0, maxRange):
+            for g in range(0, maxRange):
+                for b in range(0, maxRange):
+                    changeAllLEDState(1, r, g, b)
+                    time.sleep(0.05)
+
+
 # Make sure the socket does not already exist
 try:
     os.unlink(server_address)
@@ -54,7 +72,7 @@ sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 
 print ("LED changer started")
 unicorn.brightness(1)
-changeAllLEDState(1, 7, 7, 7)
+thread.start_new_thread(pulseThread,())
 
 sock.bind(server_address)
 
@@ -83,6 +101,7 @@ while True:
                     green = components[2]
                     blue = components[3]
                     try:
+                        initialPulseThreadShouldBeActive = False
                         print("Received number={0}, red={1}, green={2}, red={3} ".format(number, red, green, blue))
                         changeAllLEDState(int(number), int(red), int(green), int(blue))
                     except ValueError as e:
