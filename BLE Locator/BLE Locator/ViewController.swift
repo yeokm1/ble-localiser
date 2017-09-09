@@ -10,6 +10,11 @@ import UIKit
 import CoreLocation
 import Socket
 
+
+let redMacAddress = "B3"
+let greenMacAddress = "39"
+let blueMacAddress = "27"
+
 class ViewController: UIViewController, BLEHandlerDelegate{
     
     let TAG: String = "ViewController"
@@ -43,10 +48,15 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     let rpiHeight: Double = 10
     let pixelPerMeter: Double = 75
     
-    let piColourAssigment: Dictionary<String, Array<Int>> = ["B3": [1,0,0], "39": [0, 1, 0], "27": [0, 0, 1]]
-    let piIPAddrAssigment: Dictionary<String, String> = ["B3": "192.168.2.19", "39": "192.168.2.162", "27": "192.168.2.186"]
+
+    let piColourAssignment: Dictionary<String, Array<Int>> = [redMacAddress: [1,0,0], greenMacAddress: [0, 1, 0], blueMacAddress: [0, 0, 1]]
+    let piIPAddrAssignment: Dictionary<String, String> = [redMacAddress: "192.168.2.19", greenMacAddress: "192.168.2.162", blueMacAddress: "192.168.2.186"]
+    
+    let piPositionAssignment: Dictionary<String, Array<Double>> = [redMacAddress: [0, 0.435], greenMacAddress: [-0.5, -0.435], blueMacAddress: [0.5, -0.435]]
     
     var labelAssignment: Dictionary<String, UILabel> = Dictionary<String, UILabel>()
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,13 +74,13 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         distanceSliderValueDidChange(sender: maxDistanceSlider)
         
         
-        let redPiView = createRPiView(xPosM: 0, yPosM: 0.435, colour: UIColor.red)
+        let redPiView = createRPiView(xPosM: piPositionAssignment[redMacAddress]![0], yPosM: piPositionAssignment[redMacAddress]![1], colour: UIColor.red)
         mapOfBeaconsView.addSubview(redPiView)
         
-        let greenPiView = createRPiView(xPosM: -0.5, yPosM: -0.435, colour: UIColor.green)
+        let greenPiView = createRPiView(xPosM: piPositionAssignment[greenMacAddress]![0], yPosM: piPositionAssignment[greenMacAddress]![1], colour: UIColor.green)
         mapOfBeaconsView.addSubview(greenPiView)
         
-        let bluePiView = createRPiView(xPosM: 0.5, yPosM: -0.435, colour: UIColor.blue)
+        let bluePiView = createRPiView(xPosM: piPositionAssignment[blueMacAddress]![0], yPosM: piPositionAssignment[blueMacAddress]![1], colour: UIColor.blue)
         mapOfBeaconsView.addSubview(bluePiView)
         
         
@@ -155,7 +165,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
 
         let id: String = components[1]
         
-        var colourAssignment: Array<Int>? = piColourAssigment[id]
+        var colourAssignment: Array<Int>? = piColourAssignment[id]
         
         if colourAssignment == nil {
             colourAssignment = [1,1,1]
@@ -174,7 +184,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
 
         
         
-        if let ipAddrAssignment = piIPAddrAssigment[id] {
+        if let ipAddrAssignment = piIPAddrAssignment[id] {
             sendPacket(ipAddress: ipAddrAssignment, distance: distance, maxDistance: maxDistance, red: colourAssignment![0] * brightness, green: colourAssignment![1] * brightness, blue: colourAssignment![2] * brightness)
         }
         
