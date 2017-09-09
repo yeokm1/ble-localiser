@@ -33,12 +33,12 @@ func cleanupBeforeExit(){
 			outUnixSocket?.close()
 			try adapter?.enableAdvertising(false)
 	} catch {
-			print("Error disabling advertising")
+			print("Error in cleaning up before exit \(error)")
 	}
 }
 
 Signals.trap(signal: .int) { signal in
-	print("Got Signal \(signal). Stop advertising before quit")
+	print("Got Signal \(signal). Cleanup before Exit")
 	cleanupBeforeExit()
 }
 
@@ -67,18 +67,9 @@ func run(_ cmd: String) -> String{
 
 print("Adjusting device name...")
 
-let ipAddr: String? = run("hostname -I")
-
 //Reset BLE state in case there are issues
 run("hciconfig hci0 down")
 run("hciconfig hci0 up")
-
-//TODO: Don't force unwrap ipAddr
-print("IP address is " + ipAddr!)
-
-let addressComponents: [String] = ipAddr!.components(separatedBy: ".")
-let lastOctet: String = addressComponents[addressComponents.count - 1]
-
 
 let hcitoolDevOutput: String? = run("hcitool dev")
 
@@ -86,7 +77,7 @@ let macAddrComponents: [String] = hcitoolDevOutput!.components(separatedBy: ":")
 let maclastOctet: String = macAddrComponents[macAddrComponents.count - 1]
 
 
-let localName = "pib-" + maclastOctet + "-" + lastOctet
+let localName = "pib-" + maclastOctet
 
 
 print("Local name: " + localName)

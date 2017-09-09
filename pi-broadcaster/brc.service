@@ -1,6 +1,6 @@
 [Unit]
 Description=BLE Broadcaster and Server
-After=led-changer.service network-online.target
+After=led-changer.service
 
 [Install]
 WantedBy=multi-user.target
