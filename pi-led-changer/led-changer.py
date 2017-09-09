@@ -57,8 +57,11 @@ def pulseThread():
         for r in range(0, maxRange):
             for g in range(0, maxRange):
                 for b in range(0, maxRange):
-                    changeAllLEDState(1, r, g, b)
-                    time.sleep(0.05)
+                    if initialPulseThreadShouldBeActive:
+                        changeAllLEDState(1, r, g, b)
+                        time.sleep(0.05)
+                    else:
+                        break
 
 
 # Make sure the socket does not already exist
