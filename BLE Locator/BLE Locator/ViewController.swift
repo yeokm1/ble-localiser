@@ -24,9 +24,6 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     
     var bleHandler: BLEHandler!
     
-    let portNumber: Int = 55555
-    
-    var sendSocket: Socket?
     
     var brightness: Int = 0
     var maxDistance: Double = 5.0
@@ -56,10 +53,8 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     let pixelsPerMeter: Double = 60
 
     
-
     let piColourAssignment: Dictionary<String, Array<Int>> = [redMacAddress: [1,0,0], greenMacAddress: [0, 1, 0], blueMacAddress: [0, 0, 1]]
-    let piIPAddrAssignment: Dictionary<String, String> = [redMacAddress: "192.168.2.19", greenMacAddress: "192.168.2.162", blueMacAddress: "192.168.2.186"]
-    
+
     let piPositionAssignment: Dictionary<String, Array<Double>> = [redMacAddress: [0, 0.435], greenMacAddress: [-0.5, -0.435], blueMacAddress: [0.5, -0.435]]
     
     var labelAssignment: Dictionary<String, UILabel> = Dictionary<String, UILabel>()
@@ -69,7 +64,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     
     var distanceFromPis: Dictionary<String, Double> = [redMacAddress: initialDistanceFromPis, greenMacAddress: initialDistanceFromPis, blueMacAddress: initialDistanceFromPis]
     
-    
+    var piComm: PiComm!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,15 +112,13 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         updateUIWithNewdata(id: blueMacAddress, distance: initialDistanceFromPis, rssi: -100)
     
         
+        piComm = PiComm()
+        
+        piComm.openSocket()
         
         //Start BLEHandler and ask it to pass callbacks to UI (here)
         bleHandler = BLEHandler(delegate: self)
-        
-        do {
-            sendSocket = try Socket.create(family: Socket.ProtocolFamily.inet, type: Socket.SocketType.datagram, proto: Socket.SocketProtocol.udp)
-        } catch {
-            print("Error creating socket \(error)")
-        }
+    
     
         
     }
@@ -216,7 +209,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
 
     
     override func viewDidDisappear(_ animated: Bool) {
-        sendSocket?.close()
+        piComm.closeSocket()
         bleHandler.bleScan(start: false)
     }
     
@@ -282,11 +275,14 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             self.updateUIWithNewdata(id: id, distance: distance, rssi: rssi)
         }
 
+        let ledsToTurnOn: Int = Int(((maxDistance - distance) / maxDistance) * Double(NUM_LEDS))
+
+
+        let redValue = colourAssignment![0] * brightness
+        let greenValue = colourAssignment![1] * brightness
+        let blueValue = colourAssignment![2] * brightness
         
-        if let ipAddrAssignment = piIPAddrAssignment[id] {
-            sendPacket(ipAddress: ipAddrAssignment, distance: distance, maxDistance: maxDistance, red: colourAssignment![0] * brightness, green: colourAssignment![1] * brightness, blue: colourAssignment![2] * brightness)
-        }
-        
+        piComm.sendPacket(id: id, ledsToTurnOn: ledsToTurnOn, red: redValue, green: greenValue, blue: blueValue)
     
     }
     
@@ -296,30 +292,6 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     }
     
     
-    func sendPacket(ipAddress: String, distance: Double, maxDistance: Double, red: Int, green: Int, blue: Int){
-        
-        do{
-            
-            var ledsToTurnOn: Int = Int(((maxDistance - distance) / maxDistance) * Double(NUM_LEDS))
-        
-            if ledsToTurnOn > NUM_LEDS {
-                ledsToTurnOn = NUM_LEDS
-            }
-
-            
-            let dataStr: String = String.localizedStringWithFormat("%d %d %d %d", ledsToTurnOn, red, green, blue)
- 
-
-            if let address: Socket.Address = Socket.createAddress(for: ipAddress, on: Int32(portNumber)){
-                try sendSocket?.write(from: dataStr, to: address)
-            }
-            
-            
-        } catch {
-            print("Error in sending \(error)")
-        }
-        
-    }    
 
 }
 
