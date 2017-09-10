@@ -96,15 +96,15 @@ class ManualVC: UIViewController{
     }
     
     func updateLeftToNetwork(){
-        prepareToSendToNetwork(id: greenMacAddress, ledsToTurnOn: Int(lastLeftState[3]), red: lastLeftState[0], green: lastLeftState[1], blue: lastLeftState[2])
+        prepareToSendToNetwork(id: leftMacAddress, ledsToTurnOn: Int(lastLeftState[3]), red: lastLeftState[0], green: lastLeftState[1], blue: lastLeftState[2])
     }
     
     func updateMiddleToNetwork(){
-        prepareToSendToNetwork(id: redMacAddress, ledsToTurnOn: Int(lastMiddleState[3]), red: lastMiddleState[0], green: lastMiddleState[1], blue: lastMiddleState[2])
+        prepareToSendToNetwork(id: middleMacAddress, ledsToTurnOn: Int(lastMiddleState[3]), red: lastMiddleState[0], green: lastMiddleState[1], blue: lastMiddleState[2])
     }
     
     func updateRightToNetwork(){
-        prepareToSendToNetwork(id: blueMacAddress, ledsToTurnOn: Int(lastRightState[3]), red: lastRightState[0], green: lastRightState[1], blue: lastRightState[2])
+        prepareToSendToNetwork(id: rightMacAddress, ledsToTurnOn: Int(lastRightState[3]), red: lastRightState[0], green: lastRightState[1], blue: lastRightState[2])
     }
     
     

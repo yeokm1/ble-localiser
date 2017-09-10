@@ -11,9 +11,9 @@ import CoreLocation
 import Socket
 
 
-let redMacAddress = "B3"
-let greenMacAddress = "39"
-let blueMacAddress = "27"
+let leftMacAddress = "39"
+let middleMacAddress = "B3"
+let rightMacAddress = "27"
 
 let initialDistanceFromPis = 0.6
 
@@ -53,16 +53,16 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     let pixelsPerMeter: Double = 60
 
     
-    let piColourAssignment: Dictionary<String, Array<Int>> = [redMacAddress: [1,0,0], greenMacAddress: [0, 1, 0], blueMacAddress: [0, 0, 1]]
+    let piColourAssignment: Dictionary<String, Array<Int>> = [middleMacAddress: [1,0,0], leftMacAddress: [0, 1, 0], rightMacAddress: [0, 0, 1]]
 
-    let piPositionAssignment: Dictionary<String, Array<Double>> = [redMacAddress: [0, 0.435], greenMacAddress: [-0.5, -0.435], blueMacAddress: [0.5, -0.435]]
+    let piPositionAssignment: Dictionary<String, Array<Double>> = [middleMacAddress: [0, 0.435], leftMacAddress: [-0.5, -0.435], rightMacAddress: [0.5, -0.435]]
     
     var labelAssignment: Dictionary<String, UILabel> = Dictionary<String, UILabel>()
     
     var circleAssignment: Dictionary<String, UIView> = Dictionary<String, UIView>()
     
     
-    var distanceFromPis: Dictionary<String, Double> = [redMacAddress: initialDistanceFromPis, greenMacAddress: initialDistanceFromPis, blueMacAddress: initialDistanceFromPis]
+    var distanceFromPis: Dictionary<String, Double> = [middleMacAddress: initialDistanceFromPis, leftMacAddress: initialDistanceFromPis, rightMacAddress: initialDistanceFromPis]
     
     var piComm: PiComm!
 
@@ -74,42 +74,42 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         
         maxDistanceSlider.addTarget(self, action: #selector(distanceSliderValueDidChange), for: .valueChanged)
 
-        labelAssignment[redMacAddress] = redStatusLabel
-        labelAssignment[greenMacAddress] = greenStatusLabel
-        labelAssignment[blueMacAddress] = blueStatusLabel
+        labelAssignment[middleMacAddress] = redStatusLabel
+        labelAssignment[leftMacAddress] = greenStatusLabel
+        labelAssignment[rightMacAddress] = blueStatusLabel
         
         brightnessStepperValueDidChange(sender: brightnessStepper)
         distanceSliderValueDidChange(sender: maxDistanceSlider)
         
         
-        let redPiView = createRPiView(xPosM: piPositionAssignment[redMacAddress]![0], yPosM: piPositionAssignment[redMacAddress]![1], colour: UIColor.red)
+        let redPiView = createRPiView(xPosM: piPositionAssignment[middleMacAddress]![0], yPosM: piPositionAssignment[middleMacAddress]![1], colour: UIColor.red)
         mapOfBeaconsView.addSubview(redPiView)
         
-        let greenPiView = createRPiView(xPosM: piPositionAssignment[greenMacAddress]![0], yPosM: piPositionAssignment[greenMacAddress]![1], colour: UIColor.green)
+        let greenPiView = createRPiView(xPosM: piPositionAssignment[leftMacAddress]![0], yPosM: piPositionAssignment[leftMacAddress]![1], colour: UIColor.green)
         mapOfBeaconsView.addSubview(greenPiView)
         
-        let bluePiView = createRPiView(xPosM: piPositionAssignment[blueMacAddress]![0], yPosM: piPositionAssignment[blueMacAddress]![1], colour: UIColor.blue)
+        let bluePiView = createRPiView(xPosM: piPositionAssignment[rightMacAddress]![0], yPosM: piPositionAssignment[rightMacAddress]![1], colour: UIColor.blue)
         mapOfBeaconsView.addSubview(bluePiView)
         
    
         
-        let redDistanceCircle = createCircleView(id: redMacAddress, radius: distanceFromPis[redMacAddress]!, colour: UIColor.red)
-        circleAssignment[redMacAddress] = redDistanceCircle
+        let redDistanceCircle = createCircleView(id: middleMacAddress, radius: distanceFromPis[middleMacAddress]!, colour: UIColor.red)
+        circleAssignment[middleMacAddress] = redDistanceCircle
         mapOfBeaconsView.addSubview(redDistanceCircle)
         
-        let greenDistanceCircle = createCircleView(id: greenMacAddress, radius: distanceFromPis[greenMacAddress]!, colour: UIColor.green)
-        circleAssignment[greenMacAddress] = greenDistanceCircle
+        let greenDistanceCircle = createCircleView(id: leftMacAddress, radius: distanceFromPis[leftMacAddress]!, colour: UIColor.green)
+        circleAssignment[leftMacAddress] = greenDistanceCircle
         mapOfBeaconsView.addSubview(greenDistanceCircle)
         
-        let blueDistanceCircle = createCircleView(id: blueMacAddress, radius: distanceFromPis[blueMacAddress]!, colour: UIColor.blue)
-        circleAssignment[blueMacAddress] = blueDistanceCircle
+        let blueDistanceCircle = createCircleView(id: rightMacAddress, radius: distanceFromPis[rightMacAddress]!, colour: UIColor.blue)
+        circleAssignment[rightMacAddress] = blueDistanceCircle
         mapOfBeaconsView.addSubview(blueDistanceCircle)
         
         placePositionLabel(xPosM: 0, yPosM: 0)
         
-        updateUIWithNewdata(id: redMacAddress, distance: initialDistanceFromPis, rssi: -100)
-        updateUIWithNewdata(id: greenMacAddress, distance: initialDistanceFromPis, rssi: -100)
-        updateUIWithNewdata(id: blueMacAddress, distance: initialDistanceFromPis, rssi: -100)
+        updateUIWithNewdata(id: middleMacAddress, distance: initialDistanceFromPis, rssi: -100)
+        updateUIWithNewdata(id: leftMacAddress, distance: initialDistanceFromPis, rssi: -100)
+        updateUIWithNewdata(id: rightMacAddress, distance: initialDistanceFromPis, rssi: -100)
     
         
         piComm = PiComm()
@@ -229,15 +229,15 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             circleView.layer.cornerRadius = newCircleData.cornerRadius
         }
         
-        let newPositionLabelPos = generateLocation(tx1: piPositionAssignment[redMacAddress]![0],
-                                                   ty1: piPositionAssignment[redMacAddress]![1],
-                                                   tx2: piPositionAssignment[greenMacAddress]![0],
-                                                   ty2: piPositionAssignment[greenMacAddress]![1],
-                                                   tx3: piPositionAssignment[blueMacAddress]![0],
-                                                   ty3: piPositionAssignment[blueMacAddress]![1],
-                                                   s1: distanceFromPis[redMacAddress]!,
-                                                   s2: distanceFromPis[greenMacAddress]!,
-                                                   s3: distanceFromPis[blueMacAddress]!)
+        let newPositionLabelPos = generateLocation(tx1: piPositionAssignment[middleMacAddress]![0],
+                                                   ty1: piPositionAssignment[middleMacAddress]![1],
+                                                   tx2: piPositionAssignment[leftMacAddress]![0],
+                                                   ty2: piPositionAssignment[leftMacAddress]![1],
+                                                   tx3: piPositionAssignment[rightMacAddress]![0],
+                                                   ty3: piPositionAssignment[rightMacAddress]![1],
+                                                   s1: distanceFromPis[middleMacAddress]!,
+                                                   s2: distanceFromPis[leftMacAddress]!,
+                                                   s3: distanceFromPis[rightMacAddress]!)
         
         
         placePositionLabel(xPosM: newPositionLabelPos.x, yPosM: newPositionLabelPos.y)

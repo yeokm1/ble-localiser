@@ -16,9 +16,9 @@ class PiComm {
     let NUM_LEDS: Int = 64
     let portNumber: Int = 55555
 
-    let piIPAddrAssignment: Dictionary<String, String> = [redMacAddress: "192.168.2.19",
-                                                      greenMacAddress: "192.168.2.162",
-                                                      blueMacAddress: "192.168.2.186"]
+    let piIPAddrAssignment: Dictionary<String, String> = [leftMacAddress: "192.168.2.162",
+                                                          middleMacAddress: "192.168.2.19",
+                                                          rightMacAddress: "192.168.2.186"]
 
 
     var sendSocket: Socket?
