@@ -18,6 +18,7 @@
 		53ED45091F3EF7BE00E21249 /* BLEHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED45081F3EF7BE00E21249 /* BLEHandler.swift */; };
 		53ED450B1F3EF8A600E21249 /* BLEHandlerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED450A1F3EF8A600E21249 /* BLEHandlerDelegate.swift */; };
 		53ED450D1F3F4A5300E21249 /* FixedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED450C1F3F4A5300E21249 /* FixedQueue.swift */; };
+		53F230F61F64F86500A4EE61 /* ManualVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F230F51F64F86500A4EE61 /* ManualVC.swift */; };
 		75C65C0A1AEC6FBDCCD19610 /* Pods_BLE_Locator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFFF53E47F9F0BC76827946 /* Pods_BLE_Locator.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		53ED45081F3EF7BE00E21249 /* BLEHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEHandler.swift; sourceTree = "<group>"; };
 		53ED450A1F3EF8A600E21249 /* BLEHandlerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEHandlerDelegate.swift; sourceTree = "<group>"; };
 		53ED450C1F3F4A5300E21249 /* FixedQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixedQueue.swift; sourceTree = "<group>"; };
+		53F230F51F64F86500A4EE61 /* ManualVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualVC.swift; sourceTree = "<group>"; };
 		712AEB74BB927628DFCBCBED /* Pods-BLE Locator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE Locator.release.xcconfig"; path = "Pods/Target Support Files/Pods-BLE Locator/Pods-BLE Locator.release.xcconfig"; sourceTree = "<group>"; };
 		BEFFF53E47F9F0BC76827946 /* Pods_BLE_Locator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLE_Locator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8817A80F240DAE4F88359F5 /* Pods-BLE Locator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLE Locator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BLE Locator/Pods-BLE Locator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				53ED450A1F3EF8A600E21249 /* BLEHandlerDelegate.swift */,
 				53ED450C1F3F4A5300E21249 /* FixedQueue.swift */,
 				53EB4A131F64ED9700016947 /* PiComm.swift */,
+				53F230F51F64F86500A4EE61 /* ManualVC.swift */,
 			);
 			path = "BLE Locator";
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53F230F61F64F86500A4EE61 /* ManualVC.swift in Sources */,
 				53EB4A141F64ED9700016947 /* PiComm.swift in Sources */,
 				53ED44F91F3EEFF800E21249 /* ViewController.swift in Sources */,
 				53ED45091F3EF7BE00E21249 /* BLEHandler.swift in Sources */,

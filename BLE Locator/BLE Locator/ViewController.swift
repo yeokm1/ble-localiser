@@ -214,12 +214,6 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     }
     
     
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func updateUIWithNewdata(id: String, distance: Double, rssi: Double){
         
         if let labelToUpdate = labelAssignment[id]{
