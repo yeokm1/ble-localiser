@@ -49,7 +49,7 @@ sudo cp -r swiftbluetooth /usr/include/swiftbluetooth
 
 ```bash
 swift build --destination ~/swift-toolchain/cross-toolchain/rpi-ubuntu-xenial-destination.json
-scp brc-startup.sh brc.service .build/debug/PiBrc  pi@X.X.X.X:/home/pi/
+scp .build/debug/PiBrc  pi@X.X.X.X:/home/pi/
 ```
 
 ### On Pi
@@ -57,11 +57,4 @@ scp brc-startup.sh brc.service .build/debug/PiBrc  pi@X.X.X.X:/home/pi/
 To just run:
 ```bash
 sudo SOCKET=/home/pi/socket.sock ./PiBrc
-```
-
-Make program start on boot:
-```bash
-chmod +x brc-startup.sh
-sudo mv brc.service /etc/systemd/system/
-sudo systemctl enable brc.service
 ```

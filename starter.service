@@ -1,0 +1,10 @@
+[Unit]
+Description=BLE Broadcaster and Pi Changer
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=idle
+RemainAfterExit=yes
+ExecStart=/home/pi/starter.sh
