@@ -53,26 +53,46 @@ def pulseThread():
 
     global initialPulseThreadShouldBeActive
     global firstConnectionReceived
-    maxRange = 10
+    maxRange = 50
 
     while initialPulseThreadShouldBeActive:
 
         if firstConnectionReceived:
-            for r in range(0, maxRange):
-                for g in range(0, maxRange):
-                    for b in range(0, maxRange):
-                        if initialPulseThreadShouldBeActive:
-                            changeAllLEDState(1, r, g, b)
-                            time.sleep(0.1)
-                        else:
-                            break
+            changeAllLEDState(2, maxRange, 0, 0)
+            time.sleep(0.5)
+
+            if not initialPulseThreadShouldBeActive:
+                break
+            changeAllLEDState(0, 0, 0, 0)
+            time.sleep(0.5)
+
+            if not initialPulseThreadShouldBeActive:
+                break
+            changeAllLEDState(2, 0, maxRange, 0)
+            time.sleep(0.5)
+
+            if not initialPulseThreadShouldBeActive:
+                break
+            changeAllLEDState(2, 0, 0, 0)
+            time.sleep(0.5)
+
+            if not initialPulseThreadShouldBeActive:
+                break
+            changeAllLEDState(2, 0, 0, maxRange)
+            time.sleep(0.5)
+
+            if not initialPulseThreadShouldBeActive:
+                break
+            changeAllLEDState(0, 0, 0, 0)
+            time.sleep(0.5)
+
         else:
-            for brightness in range(0, maxRange):
-                if initialPulseThreadShouldBeActive:
-                    changeAllLEDState(1, brightness, brightness, brightness)
-                    time.sleep(0.1)
-                else:
-                    break
+            changeAllLEDState(1, maxRange, maxRange, maxRange)
+            time.sleep(0.5)
+            if not initialPulseThreadShouldBeActive:
+                break
+            changeAllLEDState(0, 0, 0, 0)
+            time.sleep(0.5)
 
 
 
@@ -119,7 +139,7 @@ while True:
                     blue = components[3]
                     try:
                         initialPulseThreadShouldBeActive = False
-                        print("Received number={0}, red={1}, green={2}, red={3} ".format(number, red, green, blue))
+                        print("LEDs={0}, red={1}, green={2}, red={3} ".format(number, red, green, blue))
                         changeAllLEDState(int(number), int(red), int(green), int(blue))
                     except ValueError as e:
                         print(e)
