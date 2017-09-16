@@ -111,16 +111,23 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         updateUIWithNewdata(id: leftMacAddress, distance: initialDistanceFromPis, rssi: -100)
         updateUIWithNewdata(id: rightMacAddress, distance: initialDistanceFromPis, rssi: -100)
     
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         piComm = PiComm()
         
         piComm.openSocket()
         
         //Start BLEHandler and ask it to pass callbacks to UI (here)
-        bleHandler = BLEHandler(delegate: self)
-    
-    
+        bleScanSwitch.isOn = false
         
+        bleHandler = BLEHandler(delegate: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        piComm.closeSocket()
+        piComm = nil
+        bleHandler.bleScan(start: false)
     }
     
     func placePositionLabel(xPosM: Double, yPosM: Double){
@@ -203,14 +210,6 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     func distanceSliderValueDidChange(sender: UISlider){
         maxDistance = Double(sender.value)
         maxDistanceValueLabel.text = String(format: "%.1f", maxDistance)
-    }
-    
-    
-
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        piComm.closeSocket()
-        bleHandler.bleScan(start: false)
     }
     
     

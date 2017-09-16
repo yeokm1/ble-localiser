@@ -34,6 +34,7 @@ class PiComm {
     
     func closeSocket(){
         sendSocket?.close()
+        sendSocket = nil
     }
 
 

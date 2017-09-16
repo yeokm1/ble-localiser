@@ -46,8 +46,15 @@ class ManualVC: UIViewController{
         rightColorPicker = createColorPicker(xPos: 320, yPos: 10, valueChangedSelector: #selector(rightColourPickerValueChanged))
         view.addSubview(rightColorPicker)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         piComm = PiComm()
         piComm.openSocket()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        piComm.closeSocket()
     }
     
     func createColorPicker(xPos: Int, yPos: Int, valueChangedSelector: Selector) -> ChromaColorPicker{
@@ -129,14 +136,6 @@ class ManualVC: UIViewController{
         
         piComm.sendPacket(id: id, ledsToTurnOn: ledsToTurnOn, red: newRed, green: newGreen, blue: newBlue)
     }
-    
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        piComm.closeSocket()
-    }
-    
-
-    
     
     
 }
