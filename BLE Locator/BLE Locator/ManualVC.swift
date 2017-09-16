@@ -32,6 +32,9 @@ class ManualVC: UIViewController{
     
     var leftNumLEDSlider: UISlider!
     var leftNumLEDLabel: UILabel!
+    
+    var leftBrightnessSlider: UISlider!
+    var rightBrightnessSlider: UILabel!
 
     
     //red, green, blue and numLEDs state
@@ -58,7 +61,7 @@ class ManualVC: UIViewController{
         rightColorPicker = createColorPicker(xPos: 320, yPos: 10, valueChangedSelector: #selector(rightColourPickerValueChanged))
         view.addSubview(rightColorPicker)
         
-        let leftNumLEDSliderAndLabel = createSliderAndLabel(xPos: 3, yPos: 200, minValue: 0, maxValue: 64, currentValue: 32, valueChangedSelector: #selector(leftLEDNumSliderValueChanged))
+        let leftNumLEDSliderAndLabel = createSliderAndLabel(xPos: 3, yPos: 200, ledMinValue: 0, ledMaxValue: 64, ledCurrentValue: 32, ledValueChangedSelector: #selector(leftLEDNumSliderValueChanged))
         leftNumLEDSlider = leftNumLEDSliderAndLabel.slider
         leftNumLEDLabel = leftNumLEDSliderAndLabel.label
         view.addSubview(leftNumLEDSlider)
@@ -84,19 +87,19 @@ class ManualVC: UIViewController{
     }
     
     
-    func createSliderAndLabel(xPos: Int, yPos: Int, minValue: Float, maxValue: Float, currentValue: Int, valueChangedSelector: Selector) -> (slider: UISlider, label: UILabel){
+    func createSliderAndLabel(xPos: Int, yPos: Int, ledMinValue: Float, ledMaxValue: Float, ledCurrentValue: Int, ledValueChangedSelector: Selector) -> (slider: UISlider, label: UILabel){
         
         let label = UILabel(frame: CGRect(x: xPos, y: yPos, width: 30, height: 50))
-        label.text = String(currentValue)
+        label.text = String(ledCurrentValue)
         
         let slider = UISlider(frame: CGRect(x: xPos + 30, y: yPos, width: 90, height: 50))
         
         slider.backgroundColor = UIColor.clear
-        slider.minimumValue = minValue;
-        slider.maximumValue = maxValue;
+        slider.minimumValue = ledMinValue;
+        slider.maximumValue = ledMaxValue;
         slider.isContinuous = true;
-        slider.value = Float(currentValue);
-        slider.addTarget(self, action: valueChangedSelector, for: .valueChanged)
+        slider.value = Float(ledCurrentValue);
+        slider.addTarget(self, action: ledValueChangedSelector, for: .valueChanged)
         
         return (slider: slider, label: label)
     }
