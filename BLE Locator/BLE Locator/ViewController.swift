@@ -50,7 +50,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     
     let rpiWidth: Double = 20
     let rpiHeight: Double = 10
-    let pixelsPerMeter: Double = 60
+    let pixelsPerMeter: Double = 120
 
     
     let piColourAssignment: Dictionary<String, Array<Int>> = [middleMacAddress: [1,0,0], leftMacAddress: [0, 1, 0], rightMacAddress: [0, 0, 1]]
