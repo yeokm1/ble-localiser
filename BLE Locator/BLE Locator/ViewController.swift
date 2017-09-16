@@ -13,7 +13,7 @@ import Socket
 
 let leftMacAddress = "39"
 let middleMacAddress = "B3"
-let rightMacAddress = "27"
+let rightMacAddress = "B5"
 
 let initialDistanceFromPis = 0.6
 
