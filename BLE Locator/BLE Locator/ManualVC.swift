@@ -98,6 +98,19 @@ class ManualVC: UIViewController{
         view.addSubview(middleBrightLabel)
         
         
+        let rightSliderAndLabel = createSlidersAndLabels(xPos: 320, yPos: 175, ledMinValue: LEDs_MIN, ledMaxValue: LEDS_MAX, ledCurrentValue: LEDs_DEFAULT, ledValueChangedSelector: #selector(rightLEDNumSliderValueChanged), brightMinValue: BRIGHT_MIN, brightMaxValue: BRIGHT_MAX, brightCurrentValue: BRIGHT_DEFAULT, brightValueChangedSelector: #selector(rightBrightSlidervalueChanged))
+        
+        rightNumLEDSlider = rightSliderAndLabel.ledNumSlider
+        rightNumLEDLabel = rightSliderAndLabel.ledNumLabel
+        
+        rightBrightSlider = rightSliderAndLabel.brightNumSlider
+        rightBrightLabel = rightSliderAndLabel.brightNumLabel
+        
+        view.addSubview(rightNumLEDSlider)
+        view.addSubview(rightNumLEDLabel)
+        view.addSubview(rightBrightSlider)
+        view.addSubview(rightBrightLabel)
+        
         
     }
     
