@@ -10,11 +10,6 @@ import UIKit
 import CoreLocation
 import Socket
 
-
-let leftMacAddress = "39"
-let middleMacAddress = "B3"
-let rightMacAddress = "B5"
-
 let initialDistanceFromPis = 0.6
 
 class ViewController: UIViewController, BLEHandlerDelegate{
