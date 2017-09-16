@@ -20,8 +20,6 @@ let BRIGHT_MIN: Float = 0.0
 let BRIGHT_DEFAULT: Float = 50.0
 let BRIGHT_MAX: Float = 255
 
-
-
 class ManualVC: UIViewController{
     
     var piComm: PiComm!
@@ -111,6 +109,13 @@ class ManualVC: UIViewController{
         view.addSubview(rightBrightSlider)
         view.addSubview(rightBrightLabel)
         
+        let numLEDsLabel = UILabel(frame: CGRect(x: 120, y: 150, width: 100, height: 50))
+        numLEDsLabel.text = "Num LEDs"
+        view.addSubview(numLEDsLabel)
+        
+        let brightnessLabel = UILabel(frame: CGRect(x: 120, y: 200, width: 100, height: 50))
+        brightnessLabel.text = "Brightness"
+        view.addSubview(brightnessLabel)
         
     }
     
