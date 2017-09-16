@@ -32,13 +32,19 @@ class ManualVC: UIViewController{
     
     var leftNumLEDSlider: UISlider!
     var leftNumLEDLabel: UILabel!
-    
     var leftBrightSlider: UISlider!
     var leftBrightLabel: UILabel!
     
-    var leftBrightnessSlider: UISlider!
-    var rightBrightnessSlider: UILabel!
-
+    var middleNumLEDSlider: UISlider!
+    var middleNumLEDLabel: UILabel!
+    var middleBrightSlider: UISlider!
+    var middleBrightLabel: UILabel!
+    
+    var rightNumLEDSlider: UISlider!
+    var rightNumLEDLabel: UILabel!
+    var rightBrightSlider: UISlider!
+    var rightBrightLabel: UILabel!
+    
     
     //red, green, blue and numLEDs state
     var lastLeftState: [Float] = [0, 0, 0, LEDs_DEFAULT, BRIGHT_DEFAULT]
@@ -66,7 +72,6 @@ class ManualVC: UIViewController{
         
         let leftSliderAndLabel = createSlidersAndLabels(xPos: 3, yPos: 175, ledMinValue: LEDs_MIN, ledMaxValue: LEDS_MAX, ledCurrentValue: LEDs_DEFAULT, ledValueChangedSelector: #selector(leftLEDNumSliderValueChanged), brightMinValue: BRIGHT_MIN, brightMaxValue: BRIGHT_MAX, brightCurrentValue: BRIGHT_DEFAULT, brightValueChangedSelector: #selector(leftBrightSlidervalueChanged))
         
-        
         leftNumLEDSlider = leftSliderAndLabel.ledNumSlider
         leftNumLEDLabel = leftSliderAndLabel.ledNumLabel
         
@@ -77,6 +82,22 @@ class ManualVC: UIViewController{
         view.addSubview(leftNumLEDLabel)
         view.addSubview(leftBrightSlider)
         view.addSubview(leftBrightLabel)
+        
+        
+        let middleSliderAndLabel = createSlidersAndLabels(xPos: 160, yPos: 175, ledMinValue: LEDs_MIN, ledMaxValue: LEDS_MAX, ledCurrentValue: LEDs_DEFAULT, ledValueChangedSelector: #selector(middleLEDNumSliderValueChanged), brightMinValue: BRIGHT_MIN, brightMaxValue: BRIGHT_MAX, brightCurrentValue: BRIGHT_DEFAULT, brightValueChangedSelector: #selector(middleBrightSlidervalueChanged))
+        
+        middleNumLEDSlider = middleSliderAndLabel.ledNumSlider
+        middleNumLEDLabel = middleSliderAndLabel.ledNumLabel
+        
+        middleBrightSlider = middleSliderAndLabel.brightNumSlider
+        middleBrightLabel = middleSliderAndLabel.brightNumLabel
+        
+        view.addSubview(middleNumLEDSlider)
+        view.addSubview(middleNumLEDLabel)
+        view.addSubview(middleBrightSlider)
+        view.addSubview(middleBrightLabel)
+        
+        
         
     }
     
@@ -198,8 +219,33 @@ class ManualVC: UIViewController{
         lastLeftState[4] = Float(sender.value)
         leftBrightLabel.text = String(Int(lastLeftState[4]))
         updateLeftToNetwork()
-        
     }
+    
+    
+    func middleLEDNumSliderValueChanged(sender: UISlider){
+        lastMiddleState[3] = Float(sender.value)
+        middleNumLEDLabel.text = String(Int(lastMiddleState[3]))
+        updateMiddleToNetwork()
+    }
+    
+    func middleBrightSlidervalueChanged(sender: UISlider){
+        lastMiddleState[4] = Float(sender.value)
+        middleBrightLabel.text = String(Int(lastMiddleState[4]))
+        updateMiddleToNetwork()
+    }
+    
+    func rightLEDNumSliderValueChanged(sender: UISlider){
+        lastRightState[3] = Float(sender.value)
+        rightNumLEDLabel.text = String(Int(lastRightState[3]))
+        updateRightToNetwork()
+    }
+    
+    func rightBrightSlidervalueChanged(sender: UISlider){
+        lastRightState[4] = Float(sender.value)
+        rightBrightLabel.text = String(Int(lastRightState[4]))
+        updateRightToNetwork()
+    }
+    
     
     func updateLeftToNetwork(){
         prepareToSendToNetwork(id: leftMacAddress, ledsToTurnOn: Int(lastLeftState[3]), red: lastLeftState[0], green: lastLeftState[1], blue: lastLeftState[2], brightness: lastLeftState[4])
