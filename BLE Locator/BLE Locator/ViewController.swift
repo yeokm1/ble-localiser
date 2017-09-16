@@ -46,7 +46,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     
     let positionLabelSize: Double = 20
     
-    let maximumCirclePixelDiameter: Double = 250
+    let maximumCirclePixelDiameter: Double = 200
     
     let rpiWidth: Double = 20
     let rpiHeight: Double = 10

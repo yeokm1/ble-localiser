@@ -11,7 +11,7 @@ import UIKit
 import ChromaColorPicker
 
 let colourRange = 255.0
-let maxBrightness = 10.0
+let maxBrightness = 50.0
 
 class ManualVC: UIViewController{
     
@@ -40,10 +40,10 @@ class ManualVC: UIViewController{
         leftColorPicker = createColorPicker(xPos: 3, yPos: 10, valueChangedSelector: #selector(leftColourPickerValueChanged))
         view.addSubview(leftColorPicker)
         
-        middleColorPicker = createColorPicker(xPos: 190, yPos: 10, valueChangedSelector: #selector(middleColourPickerValueChanged))
+        middleColorPicker = createColorPicker(xPos: 160, yPos: 10, valueChangedSelector: #selector(middleColourPickerValueChanged))
         view.addSubview(middleColorPicker)
         
-        rightColorPicker = createColorPicker(xPos: 373, yPos: 10, valueChangedSelector: #selector(rightColourPickerValueChanged))
+        rightColorPicker = createColorPicker(xPos: 320, yPos: 10, valueChangedSelector: #selector(rightColourPickerValueChanged))
         view.addSubview(rightColorPicker)
         
         piComm = PiComm()
@@ -51,7 +51,7 @@ class ManualVC: UIViewController{
     }
     
     func createColorPicker(xPos: Int, yPos: Int, valueChangedSelector: Selector) -> ChromaColorPicker{
-        let colorPicker = ChromaColorPicker(frame: CGRect(x: xPos, y: yPos, width: 185, height: 185))
+        let colorPicker = ChromaColorPicker(frame: CGRect(x: xPos, y: yPos, width: 160, height: 160))
         colorPicker.padding = 0
         colorPicker.stroke = 15
         colorPicker.hexLabel.isHidden = true
