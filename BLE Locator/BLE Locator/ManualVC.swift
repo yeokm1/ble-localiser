@@ -87,10 +87,12 @@ class ManualVC: UIViewController{
     }
     
     
-    func createSliderAndLabel(xPos: Int, yPos: Int, ledMinValue: Float, ledMaxValue: Float, ledCurrentValue: Int, ledValueChangedSelector: Selector) -> (slider: UISlider, label: UILabel){
+    func createSliderAndLabel(xPos: Int, yPos: Int, ledMinValue: Float, ledMaxValue: Float, ledCurrentValue: Float, ledValueChangedSelector: Selector) -> (slider: UISlider, label: UILabel){
         
         let label = UILabel(frame: CGRect(x: xPos, y: yPos, width: 30, height: 50))
-        label.text = String(ledCurrentValue)
+        
+        // We want to strip away the decimal point
+        label.text = String(Int(ledCurrentValue))
         
         let slider = UISlider(frame: CGRect(x: xPos + 30, y: yPos, width: 90, height: 50))
         
@@ -98,7 +100,7 @@ class ManualVC: UIViewController{
         slider.minimumValue = ledMinValue;
         slider.maximumValue = ledMaxValue;
         slider.isContinuous = true;
-        slider.value = Float(ledCurrentValue);
+        slider.value = ledCurrentValue;
         slider.addTarget(self, action: ledValueChangedSelector, for: .valueChanged)
         
         return (slider: slider, label: label)
