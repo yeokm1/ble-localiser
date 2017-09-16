@@ -38,7 +38,6 @@ class ManualVC: UIViewController{
     var lastLeftState: [Double] = [0, 0, 0, LEDs_DEFAULT, BRIGHT_DEFAULT]
     var lastMiddleState: [Double] = [0, 0, 0, LEDs_DEFAULT, BRIGHT_DEFAULT]
     var lastRightState: [Double] = [0, 0, 0, LEDs_DEFAULT, BRIGHT_DEFAULT]
-    
 
 
     
@@ -70,6 +69,14 @@ class ManualVC: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         piComm = PiComm()
         piComm.openSocket()
+        
+        leftColourPickerValueChanged()
+        middleColourPickerValueChanged()
+        rightColourPickerValueChanged()
+        
+        updateLeftToNetwork()
+        updateMiddleToNetwork()
+        updateRightToNetwork()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -168,12 +175,13 @@ class ManualVC: UIViewController{
     }
     
     func prepareToSendToNetwork(id: String, ledsToTurnOn: Int, red: Double, green: Double, blue: Double, brightness: Double){
-        
+
         let newRed = Int(red * brightness)
         let newGreen = Int(green * brightness)
         let newBlue = Int(blue * brightness)
         
         piComm.sendPacket(id: id, ledsToTurnOn: ledsToTurnOn, red: newRed, green: newGreen, blue: newBlue)
+     
     }
     
     
