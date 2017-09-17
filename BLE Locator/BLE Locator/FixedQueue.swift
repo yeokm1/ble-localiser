@@ -31,6 +31,28 @@ class FixedQueue {
         return array.average
     }
     
+    func getTrimmedMean(ratio: Double) -> Double{
+        
+        if ratio <= 0 {
+            return getAverage()
+        } else if ratio >= 0.5 {
+            return 0
+        }
+        
+        if array.count < maxSize {
+            return getAverage()
+        }
+        
+        var sorted = array.sorted()
+        
+        let amountToTrim: Int = Int(ratio * Double(maxSize))
+        
+        sorted.removeFirst(amountToTrim)
+        sorted.removeLast(amountToTrim)
+        
+        return sorted.average
+    }
+    
     
 }
 

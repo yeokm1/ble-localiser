@@ -17,7 +17,9 @@ class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
     let TAG = "BLEHandler"
     let BLE_DEVICE_FILTER: String = "pib"
     let broadcasterDbAt1m: Double = -60.0
-    let numRSSIValuesToAverage: Int = 5
+    let numRSSIValuesToAverage: Int = 10
+    
+    let trimRatio = 0.2
 
     
     //CBCentralManager: To manage BLE operations
@@ -78,7 +80,7 @@ class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
             
             rssiQueue.enqueue(element: rssi.doubleValue)
             
-            let avgRSSI: Double = rssiQueue.getAverage()
+            let avgRSSI: Double = rssiQueue.getTrimmedMean(ratio: trimRatio)
             
             let distance = calculateDistance(rssi: avgRSSI)
             
