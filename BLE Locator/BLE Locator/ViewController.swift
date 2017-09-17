@@ -45,12 +45,13 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     
     let rpiWidth: Double = 20
     let rpiHeight: Double = 10
-    let pixelsPerMeter: Double = 120
+    let pixelsPerMeter: Double = 50
 
+//    let piPositionAssignment: Dictionary<String, Array<Double>> = [middleMacAddress: [0, 0.435], leftMacAddress: [-0.5, -0.435], rightMacAddress: [0.5, -0.435]]
+    
+    let piPositionAssignment: Dictionary<String, Array<Double>> = [middleMacAddress: [0, 0.87], leftMacAddress: [-1, -0.87], rightMacAddress: [1, -0.87]]
     
     let piColourAssignment: Dictionary<String, Array<Int>> = [middleMacAddress: [1,0,0], leftMacAddress: [0, 1, 0], rightMacAddress: [0, 0, 1]]
-
-    let piPositionAssignment: Dictionary<String, Array<Double>> = [middleMacAddress: [0, 0.435], leftMacAddress: [-0.5, -0.435], rightMacAddress: [0.5, -0.435]]
     
     var labelAssignment: Dictionary<String, UILabel> = Dictionary<String, UILabel>()
     
@@ -223,18 +224,19 @@ class ViewController: UIViewController, BLEHandlerDelegate{
             circleView.layer.cornerRadius = newCircleData.cornerRadius
         }
         
-        let newPositionLabelPos = generateLocation(tx1: piPositionAssignment[middleMacAddress]![0],
-                                                   ty1: piPositionAssignment[middleMacAddress]![1],
-                                                   tx2: piPositionAssignment[leftMacAddress]![0],
-                                                   ty2: piPositionAssignment[leftMacAddress]![1],
-                                                   tx3: piPositionAssignment[rightMacAddress]![0],
-                                                   ty3: piPositionAssignment[rightMacAddress]![1],
-                                                   s1: distanceFromPis[middleMacAddress]!,
-                                                   s2: distanceFromPis[leftMacAddress]!,
-                                                   s3: distanceFromPis[rightMacAddress]!)
+        
+        let newPosition = trilateration(x1: piPositionAssignment[middleMacAddress]![0],
+                                        y1: piPositionAssignment[middleMacAddress]![1],
+                                        d1: distanceFromPis[middleMacAddress]!,
+                                        x2: piPositionAssignment[leftMacAddress]![0],
+                                        y2: piPositionAssignment[leftMacAddress]![1],
+                                        d2: distanceFromPis[leftMacAddress]!,
+                                        x3: piPositionAssignment[rightMacAddress]![0],
+                                        y3: piPositionAssignment[rightMacAddress]![1],
+                                        d3: distanceFromPis[rightMacAddress]!)
         
         
-        placePositionLabel(xPosM: newPositionLabelPos.x, yPosM: newPositionLabelPos.y)
+        placePositionLabel(xPosM: newPosition.xPos, yPosM: newPosition.yPos)
     }
     
     
