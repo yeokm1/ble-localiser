@@ -186,7 +186,7 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         
     }
     
-    func bleScanSwitchValueDidChange(sender:UISwitch) {
+    @objc func bleScanSwitchValueDidChange(sender:UISwitch) {
         
         if sender.isOn {
             bleHandler.bleScan(start: true)
@@ -197,13 +197,13 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     }
     
     
-    func brightnessStepperValueDidChange(sender: UIStepper){
+    @objc func brightnessStepperValueDidChange(sender: UIStepper){
         brightness = Int(sender.value)
         brightnessValueLabel.text = String(brightness)
     }
     
     
-    func distanceSliderValueDidChange(sender: UISlider){
+    @objc func distanceSliderValueDidChange(sender: UISlider){
         maxDistance = Double(sender.value)
         maxDistanceValueLabel.text = String(format: "%.1f", maxDistance)
     }

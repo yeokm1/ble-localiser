@@ -163,7 +163,7 @@ class ManualVC: UIViewController{
         ledNumSlider.isContinuous = true;
         ledNumSlider.value = ledCurrentValue;
         ledNumSlider.addTarget(self, action: ledValueChangedSelector, for: .valueChanged)
-        
+
         
         let brightNumLabel = UILabel(frame: CGRect(x: xPos, y: yPos + 50, width: 35, height: 50))
         
@@ -194,7 +194,7 @@ class ManualVC: UIViewController{
     }
     
 
-    func leftColourPickerValueChanged(){
+    @objc func leftColourPickerValueChanged(){
         let rgbColour = convertUIColorToRGB(color: leftColorPicker.currentColor)
         
         lastLeftState[0] = rgbColour.r
@@ -205,7 +205,7 @@ class ManualVC: UIViewController{
         updateLeftToNetwork()
     }
     
-    func middleColourPickerValueChanged(){
+    @objc func middleColourPickerValueChanged(){
         let rgbColour = convertUIColorToRGB(color: middleColorPicker.currentColor)
         
         lastMiddleState[0] = rgbColour.r
@@ -216,7 +216,7 @@ class ManualVC: UIViewController{
         updateMiddleToNetwork()
     }
     
-    func rightColourPickerValueChanged(){
+    @objc func rightColourPickerValueChanged(){
         let rgbColour = convertUIColorToRGB(color: rightColorPicker.currentColor)
         
         lastRightState[0] = rgbColour.r
@@ -227,38 +227,38 @@ class ManualVC: UIViewController{
         updateRightToNetwork()
     }
     
-    func leftLEDNumSliderValueChanged(sender: UISlider){
+    @objc func leftLEDNumSliderValueChanged(sender: UISlider){
         lastLeftState[3] = Float(sender.value)
         leftNumLEDLabel.text = String(Int(lastLeftState[3]))
         updateLeftToNetwork()
     }
     
-    func leftBrightSlidervalueChanged(sender: UISlider){
+    @objc func leftBrightSlidervalueChanged(sender: UISlider){
         lastLeftState[4] = Float(sender.value)
         leftBrightLabel.text = String(Int(lastLeftState[4]))
         updateLeftToNetwork()
     }
     
     
-    func middleLEDNumSliderValueChanged(sender: UISlider){
+    @objc func middleLEDNumSliderValueChanged(sender: UISlider){
         lastMiddleState[3] = Float(sender.value)
         middleNumLEDLabel.text = String(Int(lastMiddleState[3]))
         updateMiddleToNetwork()
     }
     
-    func middleBrightSlidervalueChanged(sender: UISlider){
+    @objc func middleBrightSlidervalueChanged(sender: UISlider){
         lastMiddleState[4] = Float(sender.value)
         middleBrightLabel.text = String(Int(lastMiddleState[4]))
         updateMiddleToNetwork()
     }
     
-    func rightLEDNumSliderValueChanged(sender: UISlider){
+    @objc func rightLEDNumSliderValueChanged(sender: UISlider){
         lastRightState[3] = Float(sender.value)
         rightNumLEDLabel.text = String(Int(lastRightState[3]))
         updateRightToNetwork()
     }
     
-    func rightBrightSlidervalueChanged(sender: UISlider){
+    @objc func rightBrightSlidervalueChanged(sender: UISlider){
         lastRightState[4] = Float(sender.value)
         rightBrightLabel.text = String(Int(lastRightState[4]))
         updateRightToNetwork()
