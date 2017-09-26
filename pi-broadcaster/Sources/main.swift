@@ -45,7 +45,7 @@ Signals.trap(signal: .int) { signal in
 @discardableResult
 func run(_ cmd: String) -> String{
 		 var outstr = ""
-		 let task = Task()
+		 let task = Process() //let task = Task() for Swift 3.0.2 
 		 task.launchPath = "/bin/sh"
 		 task.arguments = ["-c", cmd]
 

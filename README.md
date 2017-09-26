@@ -26,19 +26,23 @@ Change all relevant settings but the most important is to enlarge file system an
 
 You might want to add `enable_uart=1` into `/boot/config.txt`. It has an added side effect of capping the CPU frequency to the minimum.
 
-5) Follow instructions to setup for [pi-led-changer](pi-led-changer/README.md)
+5)
 
-6) Follow instructions to setup for [pi-broadcaster](pi-broadcaster/README.md)
-
-7) Make programs start on boot:
-
-On host:
-```bash
-scp starter.service starter.sh pi@X.X.X.X:/home/pi/
 ```
+sudo apt install git
+git clone
+https://github.com/yeokm1/ble-localiser
+```
+
+6) Follow instructions to setup for [pi-led-changer](pi-led-changer/README.md)
+
+7) Follow instructions to setup for [pi-broadcaster](pi-broadcaster/README.md)
+
+8) Make programs start on boot:
 
 On RPi:
 ```bash
+cd ble-localiser
 chmod +x starter.sh
 sudo mv starter.service /etc/systemd/system/
 sudo systemctl enable starter.service

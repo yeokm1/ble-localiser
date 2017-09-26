@@ -1,58 +1,36 @@
 {
-  "object": {
-    "autoPin": true,
-    "pins": [
-      {
-        "package": "Bluetooth",
-        "reason": null,
-        "repositoryURL": "https://github.com/PureSwift/Bluetooth.git",
-        "state": {
-          "branch": null,
-          "revision": "5c9b10d80421397eac4313271e4a435ac6f32c77",
-          "version": "1.2.2"
-        }
-      },
-      {
-        "package": "BluetoothLinux",
-        "reason": null,
-        "repositoryURL": "https://github.com/PureSwift/BluetoothLinux",
-        "state": {
-          "branch": null,
-          "revision": "faaa9bd133d6fb1267e3f210a42813b327e06362",
-          "version": "2.4.2"
-        }
-      },
-      {
-        "package": "CSwiftBluetoothLinux",
-        "reason": null,
-        "repositoryURL": "https://github.com/PureSwift/CSwiftBluetoothLinux.git",
-        "state": {
-          "branch": null,
-          "revision": "43baf6bded44978b76ba53833190f17adbb20281",
-          "version": "1.1.0"
-        }
-      },
-      {
-        "package": "Signals",
-        "reason": null,
-        "repositoryURL": "https://github.com/IBM-Swift/BlueSignals",
-        "state": {
-          "branch": null,
-          "revision": "99ac410f8ad4a75f0ec9a9d72512d5028e804253",
-          "version": "0.9.48"
-        }
-      },
-      {
-        "package": "Socket",
-        "reason": null,
-        "repositoryURL": "https://github.com/IBM-Swift/BlueSocket.git",
-        "state": {
-          "branch": null,
-          "revision": "c53f2459eeb60f7250f2dbc40e01685bae9f1526",
-          "version": "0.12.61"
-        }
-      }
-    ]
-  },
+  "autoPin": true,
+  "pins": [
+    {
+      "package": "Bluetooth",
+      "reason": null,
+      "repositoryURL": "https://github.com/PureSwift/Bluetooth.git",
+      "version": "1.2.2"
+    },
+    {
+      "package": "BluetoothLinux",
+      "reason": null,
+      "repositoryURL": "https://github.com/PureSwift/BluetoothLinux",
+      "version": "2.4.2"
+    },
+    {
+      "package": "CSwiftBluetoothLinux",
+      "reason": null,
+      "repositoryURL": "https://github.com/PureSwift/CSwiftBluetoothLinux.git",
+      "version": "1.1.0"
+    },
+    {
+      "package": "Signals",
+      "reason": null,
+      "repositoryURL": "https://github.com/IBM-Swift/BlueSignals",
+      "version": "0.9.49"
+    },
+    {
+      "package": "Socket",
+      "reason": null,
+      "repositoryURL": "https://github.com/IBM-Swift/BlueSocket.git",
+      "version": "0.12.68"
+    }
+  ],
   "version": 1
 }

@@ -7,4 +7,4 @@ WantedBy=multi-user.target
 [Service]
 Type=idle
 RemainAfterExit=yes
-ExecStart=/home/pi/starter.sh
+ExecStart=/home/pi/ble-localiser/starter.sh

@@ -5,56 +5,30 @@ Swift program that runs on the RPi that broadcasts via BLE and listens to port 5
 ## Swift setup steps on RPi
 
 ```bash
-wget https://www.dropbox.com/s/kmu5p6j0otz3jyr/swift-3.0.2-RPi23-RaspbianNov16.tgz
-sudo tar -xvf swift-3.0.2-RPi23-RaspbianNov16.tgz -C /
-sudo nano /etc/ld.so.conf.d/swift.conf
+sudo apt update
+sudo apt install libpython2.7 clang
 
-# Add the following lines to the `swift.conf`
-/usr/lib/swift/linux
-/usr/lib/swift/clang/lib/linux
-/usr/lib/swift/pm
-#
-
-sudo ldconfig
-
-# Install extra dependency
-wget http://ftp.us.debian.org/debian/pool/main/i/icu/libicu52_52.1-8+deb8u5_armhf.deb
-sudo dpkg -i libicu52_52.1-8+deb8u5_armhf.deb
+wget https://www.dropbox.com/s/v6oslfta6u773rj/swift-3.1.1-RPi23-RaspbianStretchAug17.tgz
+sudo tar -xvf swift-3.1.1-RPi23-RaspbianStretchAug17.tgz -C /
 ```
 
-## Swift Toolchain Setup
-Look at [swift-toolchain-setup.md](swift-toolchain-setup.md)
+## Swift Cross Compilation Toolchain Setup (Optional)
+This is in case you wish to cross compile the binary on the Mac. Look at [swift-toolchain-setup.md](swift-toolchain-setup.md)
 
-## App Compilation and Setup Steps
+## App Compilation and Setup Steps on Pi
 
-### Add Bluetooth headers on host machine (one-time step)
-
-We need to add headers to the `/usr/include` but this directory is protected by System Integrity Protection (SIP). We have to disable that first
-
-1. Boot to recovery mode by pressing CMD+R on startup
-2. OS X Utilities > Terminal
-3. Type `csrutil disable`
-4. Reboot the machine
-5. Open terminal and run the following
 ```bash
-# Change to any working directory
+# Install Bluetooth headers
 git clone https://github.com/PureSwift/CSwiftBluetoothLinux
-sudo mkdir -p /usr/include/swiftbluetooth
 cd CSwiftBluetoothLinux
-sudo cp -r swiftbluetooth /usr/include/swiftbluetooth
-```
-6. Enable SIP by repeating steps 1-4 except with `csrutil enable`
+sudo cp -r swiftbluetooth /usr/include/
 
-### Build on host machine
+cd ~
+cd ble-localiser/pi-broadcaster
+swift build
 
-```bash
-swift build --destination ~/swift-toolchain/cross-toolchain/rpi-ubuntu-xenial-destination.json
-scp .build/debug/PiBrc  pi@X.X.X.X:/home/pi/
+sudo SOCKET=/home/pi/socket.sock ./.build/debug/PiBrc
 ```
 
-### On Pi
-
-To just run:
-```bash
-sudo SOCKET=/home/pi/socket.sock ./PiBrc
-```
+## References
+1. [A Small Update on Swift For Raspberry Pi Zero/1/2/3 ](https://www.uraimo.com/2017/09/06/A-small-update-on-Swift-for-raspberry-pi-zero-1-2-3/)

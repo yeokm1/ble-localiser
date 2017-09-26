@@ -94,6 +94,27 @@ sudo mv swift-build swift-build.old
 sudo cp ~/swift-toolchain/swift-package-manager/.build/debug/swift-build /Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2017-05-09-a.xctoolchain/usr/bin/
 ```
 
+## Add Bluetooth headers on host machine (one-time step)
+
+This is only specific to my project.
+
+We need to add headers to the `/usr/include` but this directory is protected by System Integrity Protection (SIP). We have to disable that first
+
+1. Boot to recovery mode by pressing CMD+R on startup
+2. OS X Utilities > Terminal
+3. Type `csrutil disable`
+4. Reboot the machine
+5. Open terminal and run the following
+```bash
+# Change to any working directory
+git clone https://github.com/PureSwift/CSwiftBluetoothLinux
+sudo mkdir -p /usr/include/swiftbluetooth
+cd CSwiftBluetoothLinux
+sudo cp -r swiftbluetooth /usr/include/swiftbluetooth
+```
+6. Enable SIP by repeating steps 1-4 except with `csrutil enable`
+
+
 ## To cross compile Swift programs for RPi
 ```bash
 cd your-project-directory
