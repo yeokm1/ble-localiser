@@ -30,8 +30,7 @@ You might want to add `enable_uart=1` into `/boot/config.txt`. It has an added s
 
 ```
 sudo apt install git python-pip python-dev libpython2.7 clang
-git clone
-https://github.com/yeokm1/ble-localiser
+git clone https://github.com/yeokm1/ble-localiser
 ```
 
 6) Follow instructions to setup for [pi-led-changer](pi-led-changer/README.md)
