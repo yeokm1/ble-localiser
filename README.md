@@ -29,7 +29,7 @@ You might want to add `enable_uart=1` into `/boot/config.txt`. It has an added s
 5)
 
 ```
-sudo apt install git
+sudo apt install git python-pip python-dev libpython2.7 clang
 git clone
 https://github.com/yeokm1/ble-localiser
 ```

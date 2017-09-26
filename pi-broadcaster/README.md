@@ -6,7 +6,7 @@ Swift program that runs on the RPi that broadcasts via BLE and listens to port 5
 
 ```bash
 sudo apt update
-sudo apt install libpython2.7 clang
+sudo apt install libpython2.7 clang # If not installed earlier
 
 wget https://www.dropbox.com/s/v6oslfta6u773rj/swift-3.1.1-RPi23-RaspbianStretchAug17.tgz
 sudo tar -xvf swift-3.1.1-RPi23-RaspbianStretchAug17.tgz -C /

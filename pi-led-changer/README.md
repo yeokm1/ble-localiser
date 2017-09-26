@@ -8,7 +8,7 @@ One time dependency setup:
 
 ```bash
 sudo apt update
-sudo apt install python-pip python-dev
+sudo apt install python-pip python-dev # If not installed earlier
 sudo pip install unicornhat
 ```
 
