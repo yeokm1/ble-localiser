@@ -41,7 +41,7 @@ git clone https://github.com/yeokm1/ble-localiser
 
 On RPi:
 ```bash
-cd ble-localiser
+cd ~/ble-localiser
 chmod +x starter.sh
 sudo mv starter.service /etc/systemd/system/
 sudo systemctl enable starter.service
