@@ -17,7 +17,7 @@ let LEDs_DEFAULT: Float = 32.0
 let LEDS_MAX: Float = 64.0
 
 let BRIGHT_MIN: Float = 0.0
-let BRIGHT_DEFAULT: Float = 50.0
+let BRIGHT_DEFAULT: Float = 100.0
 let BRIGHT_MAX: Float = 255
 
 class ManualVC: UIViewController{
