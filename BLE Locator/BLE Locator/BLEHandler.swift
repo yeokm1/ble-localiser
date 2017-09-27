@@ -57,7 +57,7 @@ class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
     
     
     
-    //CBCentralDelegate
+    //CBCentralManagerDelegate
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi: NSNumber) {
         
@@ -99,7 +99,7 @@ class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
     }
 
     
-    //CBCentralDelegate
+    //CBCentralManagerDelegate
     
     
     //Reference http://www.raywenderlich.com/52080/introduction-core-bluetooth-building-heart-rate-monitor
