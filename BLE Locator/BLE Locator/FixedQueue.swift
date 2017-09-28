@@ -39,6 +39,7 @@ class FixedQueue {
             return 0
         }
         
+        // In case array does not have enough values as it is still filling up initially
         if array.count < maxSize {
             return getAverage()
         }
