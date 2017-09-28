@@ -169,8 +169,8 @@ class ViewController: UIViewController, BLEHandlerDelegate{
     }
     
     func generatePositionBasedOnCenterOfMap(xPosM: Double, yPosM: Double) -> (Double, Double){
-        //Our coordinate system assumes origin is bottom left however UIView is based on top left
-        //y coordinate has to be adjusted as a result
+        //Our coordinate system assumes origin is the center however UIView is based on top left
+        //x and y coordinates has to be adjusted as a result
         return (Double(mapOfBeaconsView.frame.width / 2) + (xPosM * pixelsPerMeter), Double(mapOfBeaconsView.frame.height) - (Double(mapOfBeaconsView.frame.height / 2) + (yPosM * pixelsPerMeter)))
     }
     
