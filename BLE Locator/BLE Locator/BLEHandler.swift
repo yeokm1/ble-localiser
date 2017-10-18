@@ -12,7 +12,7 @@ import CoreBluetooth
 
 //We have to extend NSObject as well as there is some issues with only implementing the CBCentralManagerDelegate
 //(Guessing it is Swift issue with implementing some Objective-C delegates)
-class BLEHandler : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate{
+class BLEHandler : NSObject, CBCentralManagerDelegate {
     
     let TAG = "BLEHandler"
     let BLE_DEVICE_FILTER: String = "pib"
