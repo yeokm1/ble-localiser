@@ -1,6 +1,6 @@
 # ble-localiser
 
-Lightning talk meant for iOSConf. This talk is about how I manage to do localisation using 3 Raspberry Pis(RPis) as beacons. Each RPi is also equipped with a 8x8 RGB LED grid that is controlled via the iPad.
+ This talk is about how I manage to do localisation using 3 Raspberry Pis(RPis) as beacons. Each RPi is also equipped with a 8x8 RGB LED grid that is controlled via the iPad. This was given at both iOS Dev Scout and iOS Conf SG 2017.
 
 ## Media
 
@@ -8,7 +8,8 @@ Lightning talk meant for iOSConf. This talk is about how I manage to do localisa
 
 ![Screen](images/rpi-with-app-manual.jpg)
 
-1. iOSConfSG: [Slides](https://www.slideshare.net/yeokm1/ble-localiser-for-ios-conf-sg-2017-80803648)
+1. Overview at iOSConfSG: [Slides](https://www.slideshare.net/yeokm1/ble-localiser-for-ios-conf-sg-2017-80803648), [Video](https://engineers.sg/v/2056)
+2. Full talk at iOSDevScout: [Slides](https://www.slideshare.net/yeokm1/ble-localiser-full-for-ios-dev-scout)
 
 ## Setup Instructions for Raspberry Pi
 
