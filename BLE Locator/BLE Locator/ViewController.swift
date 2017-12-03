@@ -168,10 +168,16 @@ class ViewController: UIViewController, BLEHandlerDelegate{
         return (rect: rect, cornerRadius: CGFloat(pixelDiameter / 2))
     }
     
+    //Our coordinate system assumes origin is the center however UIView is based on top left
+    //x and y coordinates has to be adjusted as a result
     func generatePositionBasedOnCenterOfMap(xPosM: Double, yPosM: Double) -> (Double, Double){
-        //Our coordinate system assumes origin is the center however UIView is based on top left
-        //x and y coordinates has to be adjusted as a result
-        return (Double(mapOfBeaconsView.frame.width / 2) + (xPosM * pixelsPerMeter), Double(mapOfBeaconsView.frame.height) - (Double(mapOfBeaconsView.frame.height / 2) + (yPosM * pixelsPerMeter)))
+        
+        let newCoord = (Double(mapOfBeaconsView.frame.width / 2) + (xPosM * pixelsPerMeter)
+            
+            , Double(mapOfBeaconsView.frame.height) - (Double(mapOfBeaconsView.frame.height / 2)
+            + (yPosM * pixelsPerMeter)))
+        
+        return newCoord
     }
     
     func createRPiView(xPosM: Double, yPosM: Double, colour: UIColor) -> UIView {

@@ -11,6 +11,12 @@
 		53AAFEB91F6D57E300669186 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AAFEB81F6D57E300669186 /* Constants.swift */; };
 		53C4844B1F63EFC20055C912 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C4844A1F63EFC20055C912 /* HelperFunctions.swift */; };
 		53EB4A141F64ED9700016947 /* PiComm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB4A131F64ED9700016947 /* PiComm.swift */; };
+		53ECB0621FD2935F00D205CD /* ChromaShadeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ECB05B1FD2935E00D205CD /* ChromaShadeSlider.swift */; };
+		53ECB0631FD2935F00D205CD /* ChromaHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ECB05D1FD2935E00D205CD /* ChromaHandle.swift */; };
+		53ECB0641FD2935F00D205CD /* ChromaColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ECB05E1FD2935E00D205CD /* ChromaColorPicker.swift */; };
+		53ECB0651FD2935F00D205CD /* ColorModeToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ECB05F1FD2935E00D205CD /* ColorModeToggleButton.swift */; };
+		53ECB0661FD2935F00D205CD /* UIColor+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ECB0601FD2935E00D205CD /* UIColor+Utilities.swift */; };
+		53ECB0671FD2935F00D205CD /* ChromaAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ECB0611FD2935F00D205CD /* ChromaAddButton.swift */; };
 		53ED44F71F3EEFF800E21249 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED44F61F3EEFF800E21249 /* AppDelegate.swift */; };
 		53ED44F91F3EEFF800E21249 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED44F81F3EEFF800E21249 /* ViewController.swift */; };
 		53ED44FC1F3EEFF800E21249 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53ED44FA1F3EEFF800E21249 /* Main.storyboard */; };
@@ -29,6 +35,13 @@
 		53AAFEB81F6D57E300669186 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		53C4844A1F63EFC20055C912 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		53EB4A131F64ED9700016947 /* PiComm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PiComm.swift; sourceTree = "<group>"; };
+		53ECB05B1FD2935E00D205CD /* ChromaShadeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChromaShadeSlider.swift; sourceTree = "<group>"; };
+		53ECB05C1FD2935E00D205CD /* ChromaColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChromaColorPicker.h; sourceTree = "<group>"; };
+		53ECB05D1FD2935E00D205CD /* ChromaHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChromaHandle.swift; sourceTree = "<group>"; };
+		53ECB05E1FD2935E00D205CD /* ChromaColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChromaColorPicker.swift; sourceTree = "<group>"; };
+		53ECB05F1FD2935E00D205CD /* ColorModeToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorModeToggleButton.swift; sourceTree = "<group>"; };
+		53ECB0601FD2935E00D205CD /* UIColor+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Utilities.swift"; sourceTree = "<group>"; };
+		53ECB0611FD2935F00D205CD /* ChromaAddButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChromaAddButton.swift; sourceTree = "<group>"; };
 		53ED44F31F3EEFF800E21249 /* BLE Locator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BLE Locator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53ED44F61F3EEFF800E21249 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53ED44F81F3EEFF800E21249 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -57,12 +70,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53ECB05A1FD2934000D205CD /* ChromaColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				53ECB0611FD2935F00D205CD /* ChromaAddButton.swift */,
+				53ECB05C1FD2935E00D205CD /* ChromaColorPicker.h */,
+				53ECB05E1FD2935E00D205CD /* ChromaColorPicker.swift */,
+				53ECB05D1FD2935E00D205CD /* ChromaHandle.swift */,
+				53ECB05B1FD2935E00D205CD /* ChromaShadeSlider.swift */,
+				53ECB05F1FD2935E00D205CD /* ColorModeToggleButton.swift */,
+				53ECB0601FD2935E00D205CD /* UIColor+Utilities.swift */,
+			);
+			path = ChromaColorPicker;
+			sourceTree = "<group>";
+		};
 		53ED44EA1F3EEFF800E21249 = {
 			isa = PBXGroup;
 			children = (
 				534B50211F47E6E100666ACD /* BLE Locator-Bridging-Header.h */,
 				534B501F1F47E5FA00666ACD /* Default-568h@2x.png */,
 				53ED44F51F3EEFF800E21249 /* BLE Locator */,
+				53ECB05A1FD2934000D205CD /* ChromaColorPicker */,
 				53ED44F41F3EEFF800E21249 /* Products */,
 				568270D7ED183AC2ACEA6407 /* Pods */,
 				B60038DA18B0199D204D7AD6 /* Frameworks */,
@@ -211,12 +239,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BLE Locator/Pods-BLE Locator-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BlueSocket/Socket.framework",
-				"${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Socket.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -248,10 +274,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53ECB0631FD2935F00D205CD /* ChromaHandle.swift in Sources */,
 				53F230F61F64F86500A4EE61 /* ManualVC.swift in Sources */,
 				53EB4A141F64ED9700016947 /* PiComm.swift in Sources */,
+				53ECB0671FD2935F00D205CD /* ChromaAddButton.swift in Sources */,
 				53ED44F91F3EEFF800E21249 /* ViewController.swift in Sources */,
+				53ECB0661FD2935F00D205CD /* UIColor+Utilities.swift in Sources */,
 				53ED45091F3EF7BE00E21249 /* BLEHandler.swift in Sources */,
+				53ECB0651FD2935F00D205CD /* ColorModeToggleButton.swift in Sources */,
+				53ECB0641FD2935F00D205CD /* ChromaColorPicker.swift in Sources */,
+				53ECB0621FD2935F00D205CD /* ChromaShadeSlider.swift in Sources */,
 				53ED44F71F3EEFF800E21249 /* AppDelegate.swift in Sources */,
 				53ED450B1F3EF8A600E21249 /* BLEHandlerDelegate.swift in Sources */,
 				53ED450D1F3F4A5300E21249 /* FixedQueue.swift in Sources */,

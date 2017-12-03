@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import ChromaColorPicker
+//import ChromaColorPicker
 
 let colourRange = 255.0
 
